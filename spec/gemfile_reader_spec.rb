@@ -62,6 +62,38 @@ describe GemfileReader, "with grouping" do
     gem.git.should     be_nil
   end
 end
+
+describe GemfileReader, "advanced" do
+  let(:gems) { GemfileReader.evaluate(gemfile('rails')) }
+
+  it "should read arel correctly" do
+    gem = find_gem('arel', 1)
+
+    gem.name.should    eql('arel')
+    gem.version.should be_nil
+    gem.path.should    be_nil
+    gem.git.should     eql("git://github.com/rails/arel.git")
+  end
+
+  it "should read RedCloth correctly" do
+    gem = find_gem('RedCloth')
+
+    gem.name.should    eql('RedCloth')
+    gem.version.should eql('~> 4.2')
+    gem.path.should    be_nil
+    gem.git.should     be_nil
+  end
+
+  it "should read ruby-debug correctly" do
+    gem = find_gem('ruby-debug')
+
+    gem.name.should    eql('ruby-debug')
+    gem.version.should eql('>= 0.10.3')
+    gem.path.should    be_nil
+    gem.git.should     be_nil
+  end
+end
+
 describe GemfileReader, "security spot-checks" do
   it "should not allow Ruby calls on their own" do
     gemfile = %{File.unlink("#{__FILE__}")}
