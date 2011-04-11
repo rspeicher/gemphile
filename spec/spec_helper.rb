@@ -1,5 +1,7 @@
 $:.unshift File.expand_path("../../lib", File.dirname(__FILE__))
 
+require 'gemfile_reader'
+
 module SpecHelpers
   def gemfile(name)
     File.expand_path("./fixtures/#{name}.rb", File.dirname(__FILE__))
