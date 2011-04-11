@@ -4,13 +4,13 @@ require 'gemfile_reader'
 
 module SpecHelpers
   def gemfile(name)
-    File.expand_path("./fixtures/#{name}.rb", File.dirname(__FILE__))
+    File.read(File.expand_path("./fixtures/#{name}.rb", File.dirname(__FILE__)))
   end
 
   # Assumes `let(:gems)` has been defined
-  def find_gem(name)
+  def find_gem(name, index = 0)
     return unless gems
-    gems.find { |g| g.name == name }
+    gems.find_all { |g| g.name == name }[index]
   end
 end
 

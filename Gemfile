@@ -11,7 +11,6 @@ end
 
 group :test do
   gem 'guard', '~> 0.3'
-
   gem 'guard-bundler'
   gem 'guard-rspec'
 end

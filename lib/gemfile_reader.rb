@@ -4,33 +4,55 @@
 # the gems specified.
 class GemfileReader
   # Represents a single <tt>gem</tt> entry in a gemfile
-  class Entry < Struct.new(:name, :version, :require, :path, :git, :group, :platforms)
-  end
+  class Entry < Struct.new(:name, :version, :path, :git); end
 
   class << self
-    def read(filename)
-      File.open(filename, 'rb') { |f| f.read }
-    end
-
     # Read a specified Gemfile, evaluating its contents inside an instance of
     # {GemfileReader} and returning an array of {Entry} instances.
     #
     # @param [String] filename
     # @return [Array] Array of {Entry} instances
-    def evaluate(filename)
+    def evaluate(file_contents)
       gemfile = new
-      gemfile.instance_eval(read(filename))
-      gemfile.gems
+
+      file_contents = scrub(file_contents)
+
+      # Even after scrubbing the file contents above, we still
+      # want to evaluate the file in an elevated safety environment
+      # to avoid people doing nasty things
+      lambda {
+        $SAFE = 3
+        gemfile.instance_eval(file_contents)
+      }.call
+
+      return gemfile.gems
+    end
+
+    private
+
+    # Scrub Gemfile contents of some specific potentially nasty things
+    def scrub(contents)
+      contents.
+        split("\n").
+        # Select only "gem ..." lines
+        select { |l| l.strip =~ /^gem .*$/ }.
+
+        # Prevents a SecurityError when accessing ENV
+        each { |l| l.gsub!(/ENV[^\s]+/, '""') }.
+
+        # Join it back together and untaint
+        join("\n").untaint
     end
   end
+
+  # The only options to `gem` we actually care about
+  VALID_OPTIONS = [:path, :git].freeze
 
   # @attr [Array]
   attr_reader :gems
 
   def initialize
-    @gems              = []
-    @current_groups    = nil
-    @current_platforms = nil
+    @gems = []
   end
 
   protected
@@ -40,33 +62,25 @@ class GemfileReader
   end
 
   def group(*args, &block)
-    @current_groups = args
     yield
-    @current_groups = nil
   end
 
-  def platforms(*args, &block)
-    @current_platforms = args
-    yield
-    @current_platforms = nil
-  end
+  alias_method :groups, :group
+  alias_method :platforms, :group
 
   def gem(name, *options)
     g = Entry.new
 
-    g.name      = name
-    g.version   = options[0].is_a?(String) ? options.shift : nil
-    g.group     = @current_groups
-    g.platforms = @current_platforms
+    g.name = name
 
-    # Apply remaining options from a Hash
-    if options[0]
-      options.shift.each_pair do |k,v|
-        # Normalize group to an Array
-        if k == :group
-          g[k] = [v]
-        else
-          g[k] = v
+    options.each do |o|
+      if o.is_a?(String)
+        g.version = o
+      else
+        # Apply remaining options from a Hash
+        if options[0]
+          attributes = options.shift.select { |v| VALID_OPTIONS.include? v }
+          attributes.each_pair { |k,v| g[k] = v }
         end
       end
     end
