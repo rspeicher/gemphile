@@ -8,10 +8,11 @@ describe GemfileReader, "with a simple Gemfile" do
 
     gem.name.should      eql('rails')
     gem.version.should   eql('3.0.6')
-    gem.type.should      be_nil
+    gem.require.should   be_nil
     gem.path.should      be_nil
+    gem.git.should       be_nil
     gem.group.should     be_nil
-    gem.platform.should  be_nil
+    gem.platforms.should be_nil
   end
 
   it "should read mysql correctly" do
@@ -19,10 +20,11 @@ describe GemfileReader, "with a simple Gemfile" do
 
     gem.name.should      eql('mysql')
     gem.version.should   be_nil
-    gem.type.should      be_nil
+    gem.require.should   be_nil
     gem.path.should      be_nil
+    gem.git.should       be_nil
     gem.group.should     be_nil
-    gem.platform.should  be_nil
+    gem.platforms.should be_nil
   end
 end
 
@@ -34,10 +36,11 @@ describe GemfileReader, "with grouping" do
 
     gem.name.should      eql('rspec')
     gem.version.should   eql('~> 2.5')
-    gem.type.should      be_nil
+    gem.require.should   be_nil
     gem.path.should      be_nil
+    gem.git.should       be_nil
     gem.group.should     eql([:development, :test])
-    gem.platform.should  be_nil
+    gem.platforms.should be_nil
   end
 
   it "should read guard correctly" do
@@ -45,10 +48,11 @@ describe GemfileReader, "with grouping" do
 
     gem.name.should      eql('guard')
     gem.version.should   be_nil
-    gem.type.should      be_nil
+    gem.require.should   be_nil
     gem.path.should      be_nil
+    gem.git.should       be_nil
     gem.group.should     eql([:test])
-    gem.platform.should  be_nil
+    gem.platforms.should be_nil
   end
 
   it "should read cucumber correctly" do
@@ -56,10 +60,11 @@ describe GemfileReader, "with grouping" do
 
     gem.name.should      eql('cucumber')
     gem.version.should   eql('~> 0.10')
-    gem.type.should      be_nil
+    gem.require.should   be_nil
     gem.path.should      be_nil
+    gem.git.should       be_nil
     gem.group.should     eql([:test])
-    gem.platform.should  be_nil
+    gem.platforms.should be_nil
   end
 
   it "should read cucumber-rails correctly" do
@@ -67,9 +72,10 @@ describe GemfileReader, "with grouping" do
 
     gem.name.should      eql('cucumber-rails')
     gem.version.should   eql('>= 0.4')
-    gem.type.should      be_nil
+    gem.require.should   be_nil
     gem.path.should      be_nil
+    gem.git.should       be_nil
     gem.group.should     eql([:test])
-    gem.platform.should  be_nil
+    gem.platforms.should be_nil
   end
 end

@@ -4,7 +4,7 @@
 # the gems specified.
 class GemfileReader
   # Represents a single <tt>gem</tt> entry in a gemfile
-  class Entry < Struct.new(:name, :version, :type, :path, :group, :platform)
+  class Entry < Struct.new(:name, :version, :require, :path, :git, :group, :platforms)
   end
 
   class << self
@@ -28,8 +28,9 @@ class GemfileReader
   attr_reader :gems
 
   def initialize
-    @gems          = []
-    @current_group = nil
+    @gems              = []
+    @current_groups    = nil
+    @current_platforms = nil
   end
 
   protected
@@ -39,17 +40,24 @@ class GemfileReader
   end
 
   def group(*args, &block)
-    @current_group = args
+    @current_groups = args
     yield
-    @current_group = nil
+    @current_groups = nil
+  end
+
+  def platforms(*args, &block)
+    @current_platforms = args
+    yield
+    @current_platforms = nil
   end
 
   def gem(name, *options)
     g = Entry.new
 
-    g.name    = name
-    g.version = options[0].is_a?(String) ? options.shift : nil
-    g.group   = @current_group
+    g.name      = name
+    g.version   = options[0].is_a?(String) ? options.shift : nil
+    g.group     = @current_groups
+    g.platforms = @current_platforms
 
     # Apply remaining options from a Hash
     if options[0]
