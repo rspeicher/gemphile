@@ -10,6 +10,8 @@ group :development, :test do
 end
 
 group :test do
+  gem 'growl'
+
   gem 'guard', '~> 0.3'
   gem 'guard-bundler'
   gem 'guard-rspec'
