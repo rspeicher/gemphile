@@ -35,15 +35,33 @@ class GemfileReader
   protected
 
   def method_missing(m, *args)
-    # Ignored
+    # Ignore everything that's not defined below
   end
 
-  def gem(name, version = nil, options = {})
+  def group(*args, &block)
+    @current_group = args
+    yield
+    @current_group = nil
+  end
+
+  def gem(name, *options)
     g = Entry.new
 
     g.name    = name
-    g.version = version
-    options.each_pair { |k,v| g[k] = v }
+    g.version = options[0].is_a?(String) ? options.shift : nil
+    g.group   = @current_group
+
+    # Apply remaining options from a Hash
+    if options[0]
+      options.shift.each_pair do |k,v|
+        # Normalize group to an Array
+        if k == :group
+          g[k] = [v]
+        else
+          g[k] = v
+        end
+      end
+    end
 
     @gems << g
   end

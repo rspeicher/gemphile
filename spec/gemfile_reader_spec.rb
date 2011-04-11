@@ -3,25 +3,73 @@ require 'spec_helper'
 describe GemfileReader, "with a simple Gemfile" do
   let(:gems) { GemfileReader.evaluate(gemfile('simplest')) }
 
-  describe "first entry" do
-    subject { gems[0] }
+  it "should read rails correctly" do
+    gem = find_gem('rails')
 
-    its(:name) { should eql('rails') }
-    its(:version) { should eql('3.0.6') }
-    its(:type) { should be_nil }
-    its(:path) { should be_nil }
-    its(:group) { should be_nil }
-    its(:platform) { should be_nil }
+    gem.name.should      eql('rails')
+    gem.version.should   eql('3.0.6')
+    gem.type.should      be_nil
+    gem.path.should      be_nil
+    gem.group.should     be_nil
+    gem.platform.should  be_nil
   end
 
-  describe "second entry" do
-    subject { gems[1] }
+  it "should read mysql correctly" do
+    gem = find_gem('mysql')
 
-    its(:name) { should eql('mysql') }
-    its(:version) { should be_nil }
-    its(:type) { should be_nil }
-    its(:path) { should be_nil }
-    its(:group) { should be_nil }
-    its(:platform) { should be_nil }
+    gem.name.should      eql('mysql')
+    gem.version.should   be_nil
+    gem.type.should      be_nil
+    gem.path.should      be_nil
+    gem.group.should     be_nil
+    gem.platform.should  be_nil
+  end
+end
+
+describe GemfileReader, "with grouping" do
+  let(:gems) { GemfileReader.evaluate(gemfile('grouping')) }
+
+  it "should read rspec correctly" do
+    gem = find_gem('rspec')
+
+    gem.name.should      eql('rspec')
+    gem.version.should   eql('~> 2.5')
+    gem.type.should      be_nil
+    gem.path.should      be_nil
+    gem.group.should     eql([:development, :test])
+    gem.platform.should  be_nil
+  end
+
+  it "should read guard correctly" do
+    gem = find_gem('guard')
+
+    gem.name.should      eql('guard')
+    gem.version.should   be_nil
+    gem.type.should      be_nil
+    gem.path.should      be_nil
+    gem.group.should     eql([:test])
+    gem.platform.should  be_nil
+  end
+
+  it "should read cucumber correctly" do
+    gem = find_gem('cucumber')
+
+    gem.name.should      eql('cucumber')
+    gem.version.should   eql('~> 0.10')
+    gem.type.should      be_nil
+    gem.path.should      be_nil
+    gem.group.should     eql([:test])
+    gem.platform.should  be_nil
+  end
+
+  it "should read cucumber-rails correctly" do
+    gem = find_gem('cucumber-rails')
+
+    gem.name.should      eql('cucumber-rails')
+    gem.version.should   eql('>= 0.4')
+    gem.type.should      be_nil
+    gem.path.should      be_nil
+    gem.group.should     eql([:test])
+    gem.platform.should  be_nil
   end
 end
