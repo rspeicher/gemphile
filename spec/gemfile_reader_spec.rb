@@ -96,8 +96,7 @@ end
 
 describe GemfileReader, "security spot-checks" do
   it "should not allow Ruby calls on their own" do
-    gemfile = %{File.unlink("#{__FILE__}")}
-
+    gemfile = %{File.unlink("/tmp/exploited.rb")}
     File.expects(:unlink).never
     GemfileReader.evaluate(gemfile)
   end
@@ -105,53 +104,61 @@ describe GemfileReader, "security spot-checks" do
   context "attempting to read files" do
     it "should not allow File calls hidden after a gem call" do
       gemfile = %{gem 'foo'; File.read("/etc/hosts")}
-      expect { GemfileReader.evaluate(gemfile) }.to raise_error(SecurityError)
+      File.expects(:read).never
+      GemfileReader.evaluate(gemfile)
     end
 
-    it "should discard tainted strings used as gem names" do
+    it "should not allow File calls as the first parameter to gem" do
       gemfile = %{gem File.read("#{File.expand_path(__FILE__)}")}
       expect { GemfileReader.evaluate(gemfile) }.to raise_error(SecurityError)
     end
 
-    it "should discard tainted strings used as version strings" do
+    it "should not allow File calls as the second parameter to gem" do
       gemfile = %{gem 'name', File.read("#{File.expand_path(__FILE__)}")}
       expect { GemfileReader.evaluate(gemfile) }.to raise_error(SecurityError)
     end
 
-    it "should discard tainted strings used as path strings" do
+    it "should not allow File calls as the values of the Hash parameter to gem" do
       gemfile = %{gem 'name', :path => File.read("#{File.expand_path(__FILE__)}")}
       expect { GemfileReader.evaluate(gemfile) }.to raise_error(SecurityError)
-    end
 
-    it "should discard tainted strings used as path strings" do
       gemfile = %{gem 'name', :git => File.read("#{File.expand_path(__FILE__)}")}
-      expect { GemfileReader.evaluate(gemfile) }.to raise_error(SecurityError)
-    end
-
-    it "should disallow marking tainted strings as untainted" do
-      gemfile = %{gem File.read("#{File.expand_path(__FILE__)}").untaint}
       expect { GemfileReader.evaluate(gemfile) }.to raise_error(SecurityError)
     end
   end
 
   context "arbitrary code execution" do
     it "should not allow FileUtils.rm_rf called as argument to gem" do
-      gemfile = %{gem FileUtils.rm_rf("#{__FILE__}")}
+      gemfile = %{gem FileUtils.rm_rf("/tmp/exploited.rb")}
       expect { GemfileReader.evaluate(gemfile) }.to raise_error(SecurityError)
     end
 
-    it "should not allow eval calls hidden after a gem call" do
+    it "should not allow eval calls hidden inside a gem call" do
       gemfile = %{gem eval(File.read("/etc/hosts"))}
       expect { GemfileReader.evaluate(gemfile) }.to raise_error(SecurityError)
     end
 
-    it "should not allow backtick calls hidden after a gem call" do
+    it "should not allow backtick calls hidden inside a gem call" do
       gemfile = %{gem `touch /tmp/exploited.rb`}
       expect { GemfileReader.evaluate(gemfile) }.to raise_error(SecurityError)
     end
 
-    it "should not allow %x{...} calls hidden after a gem call" do
+    it "should not allow %x{...} calls hidden inside a gem call" do
       gemfile = %{gem %x{touch /tmp/exploited.rb}}
+      expect { GemfileReader.evaluate(gemfile) }.to raise_error(SecurityError)
+    end
+  end
+
+  context "site modification" do
+    it "should not allow load path changes" do
+      gemfile = %{gem $:.unshift('/tmp')}
+
+      GemfileReader.evaluate(gemfile)
+      $:.should_not include('/tmp')
+    end
+
+    it "should not allow local requires" do
+      gemfile = %{gem require('spec_helper')}
       expect { GemfileReader.evaluate(gemfile) }.to raise_error(SecurityError)
     end
   end

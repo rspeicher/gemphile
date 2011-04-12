@@ -34,8 +34,8 @@ class GemfileReader
     def scrub(contents)
       contents.
         split("\n").
-        # Select only "gem ..." lines
-        select { |l| l.strip =~ /^gem .*$/ }.
+        # Select only "gem ..." lines, ignoring multiple commands on a single line
+        select { |l| l.strip =~ /^gem [^;\$]+$/ }.
 
         # Prevents a SecurityError when accessing ENV
         each { |l| l.gsub!(/ENV[^\s]+/, '""') }.
