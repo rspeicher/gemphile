@@ -73,15 +73,13 @@ class GemfileReader
 
     g.name = name
 
-    options.each do |o|
-      if o.is_a?(String)
-        g.version = o
-      else
+    options.each do |opt|
+      if opt.is_a?(String)
+        g.version = opt
+      elsif opt.is_a?(Hash)
         # Apply remaining options from a Hash
-        if options[0]
-          attributes = options.shift.select { |v| VALID_OPTIONS.include? v }
-          attributes.each_pair { |k,v| g[k] = v }
-        end
+        opt.select! { |k,v| VALID_OPTIONS.include? k }
+        opt.each_pair { |k,v| g[k] = v }
       end
     end
 
