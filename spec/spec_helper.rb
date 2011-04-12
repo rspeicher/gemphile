@@ -4,7 +4,7 @@ require 'gemfile_reader'
 
 module SpecHelpers
   def gemfile(name)
-    File.read(File.expand_path("./fixtures/#{name}.rb", File.dirname(__FILE__)))
+    File.read(File.expand_path("./fixtures/gemfiles/#{name}.rb", File.dirname(__FILE__)))
   end
 
   # Assumes `let(:gems)` has been defined
