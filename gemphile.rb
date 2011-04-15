@@ -1,5 +1,7 @@
 require 'bundler/setup'
 
+require 'delayed_job'
+require 'delayed_job_mongoid'
 require 'json'
 require 'mongoid'
 require 'sinatra/base'

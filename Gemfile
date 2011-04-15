@@ -4,6 +4,9 @@ gem 'sinatra',  '~> 1.2'
 gem 'mongoid',  '~> 2.0'
 gem 'bson_ext', '~> 1.3'
 
+gem 'delayed_job',         '~> 2.1'
+gem 'delayed_job_mongoid', '~> 1.0'
+
 group :development, :test do
   gem 'mocha'
   gem 'rspec', '~> 2.5'
