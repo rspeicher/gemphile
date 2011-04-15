@@ -5,8 +5,9 @@ gem 'mongoid',  '~> 2.0'
 gem 'bson_ext', '~> 1.3'
 
 group :development, :test do
-  gem 'rspec', '~> 2.5'
   gem 'mocha'
+  gem 'rspec', '~> 2.5'
+  gem 'ruby-debug19'
 end
 
 group :test do
