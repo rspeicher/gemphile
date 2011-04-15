@@ -4,7 +4,12 @@
 # the gems specified.
 class GemfileReader
   # Represents a single <tt>gem</tt> entry in a gemfile
-  class Entry < Struct.new(:name, :version, :path, :git); end
+  class Entry < Struct.new(:name, :version, :path, :git)
+    # Converts the object to a <tt>Hash</tt>
+    def to_hash
+      self.members.zip(self.values).each_with_object({}) { |v,o| o[v[0]] = v[1] }
+    end
+  end
 
   # Read a specified Gemfile, evaluating its contents inside an instance of
   # {GemfileReader} and returning an array of {Entry} instances.

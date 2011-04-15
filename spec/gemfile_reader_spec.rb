@@ -167,3 +167,12 @@ describe GemfileReader do
     end
   end
 end
+
+describe GemfileReader::Entry do
+  describe "#to_hash" do
+    it "should convert to a Hash" do
+      e = GemfileReader::Entry.new('name', 'version', 'path', 'git')
+      e.to_hash.should eql({name: 'name', version: 'version', path: 'path', git: 'git'})
+    end
+  end
+end
