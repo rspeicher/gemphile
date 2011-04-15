@@ -13,7 +13,7 @@ class GemfileJob < Struct.new(:repo_id)
 
       # Run it through GemfileReader
       gems = `vendor/gemfile_reader/bin/gemfile_reader #{filename}`.strip
-      repo.set_gems(gems)
+      repo.populate_gems(gems)
 
       `rm -f #{filename}`
     end
