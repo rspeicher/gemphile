@@ -72,4 +72,31 @@ describe Repository do
       end
     end
   end
+
+  describe "#populate_gems" do
+    let(:repo) { Repository.create(owner: 'tsigo', name: 'gemphile') }
+
+    context "given valid data" do
+      it "populates gem records" do
+        gemstr = gemfile('simplest')
+
+        expect { repo.populate_gems(gemstr) }.to change(repo.gems, :count).from(0).to(2)
+      end
+
+      it "removes old gem records before adding new ones" do
+        # Add "old" gems
+        repo.populate_gems(gemfile('simplest'))
+
+        repo.populate_gems(gemfile('grouping'))
+        repo.gems.any? { |g| g.name == 'rails' }.should be_false
+        repo.gems.any? { |g| g.name == 'cucumber' }.should be_true
+      end
+    end
+
+    context "given empty data" do
+      it "does not raise an error" do
+        expect { repo.populate_gems('[]') }.to_not raise_error
+      end
+    end
+  end
 end

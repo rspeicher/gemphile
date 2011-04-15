@@ -11,6 +11,9 @@ class Repository
   field :watchers,    type: Integer
   field :forks,       type: Integer
 
+  embeds_many :gem_entries
+  alias_method :gems, :gem_entries
+
   # Creates or updates a record based on a payload from a GitHub post-commit
   # hook
   #
@@ -33,6 +36,25 @@ class Repository
         record = find_or_initialize_by(owner: repo['owner'], name: repo['name'])
         record.update_attributes(repo)
         record
+      end
+    rescue JSON::ParserError => ignored
+    end
+  end
+
+  # Updates embeded {Gem} documents based on a parsing of a Gemfile by {GemfileJob}
+  #
+  # @param [String] Raw output string, to be parsed into JSON
+  def populate_gems(gemstr)
+    return unless gemstr.is_a?(String)
+
+    begin
+      gems = JSON.parse(gemstr)
+
+      # Remove old gem entries before we add new ones
+      self.gems.destroy_all if gems.length > 0
+
+      gems.each do |gem|
+        self.gems.create(name: gem['name'], version: gem['version'])
       end
     rescue JSON::ParserError => ignored
     end
