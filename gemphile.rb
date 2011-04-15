@@ -4,6 +4,8 @@ require 'json'
 require 'mongoid'
 require 'sinatra/base'
 
+require 'models/all'
+
 class Gemphile < Sinatra::Base
   configure do
     Mongoid.configure do |config|
