@@ -1,6 +1,8 @@
 require 'spec_helper'
 require 'fileutils'
 
+require 'gemfile_reader'
+
 describe GemfileReader, "with a simple Gemfile" do
   let(:gems) { GemfileReader.evaluate(gemfile('simplest')) }
 
