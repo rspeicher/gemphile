@@ -22,12 +22,9 @@ class Repository
       repo.select! { |k,v| fields.include? k }
       repo['owner'] = repo['owner']['name']
 
-      if existing = self.where(owner: repo['owner'], name: repo['name']).first
-        existing.update(repo)
-        return existing
-      else
-        return self.create(repo)
-      end
+      record = find_or_initialize_by(owner: repo['owner'], name: repo['name'])
+      record.update_attributes(repo)
+      record
     end
   end
 end
