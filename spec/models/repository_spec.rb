@@ -74,7 +74,7 @@ describe Repository do
   end
 
   describe "#populate_gems" do
-    let(:repo) { Repository.create(owner: 'tsigo', name: 'gemphile') }
+    let(:repo) { Factory(:repository) }
 
     context "given valid data" do
       it "populates gem records" do

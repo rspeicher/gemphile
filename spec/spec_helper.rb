@@ -1,6 +1,7 @@
 ENV['RACK_ENV'] = 'test'
 
 require_relative '../gemphile'
+require_relative 'factories'
 
 require 'database_cleaner'
 require 'fakeweb'
