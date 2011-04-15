@@ -15,5 +15,7 @@ class Gemphile < Sinatra::Base
   end
 
   post '/push' do
+    Repository.from_payload(params[:payload])
+    status(200)
   end
 end

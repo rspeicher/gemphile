@@ -10,6 +10,10 @@ require 'fakeweb'
 require 'rack/test'
 
 module SpecHelpers
+  def app
+    Gemphile
+  end
+
   def payload(name)
     File.read(File.expand_path("./fixtures/github_payloads/#{name}.json", File.dirname(__FILE__)))
   end
