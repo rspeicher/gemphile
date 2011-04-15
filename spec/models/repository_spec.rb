@@ -47,4 +47,19 @@ describe Repository, "#from_payload" do
       repo.forks.should eql(1)
     end
   end
+
+  context "given data for a repository we've already seen" do
+    let(:data) { payload('initial_push') }
+    let(:repo) { Repository.from_payload(data) }
+
+    it "returns the existing repository" do
+      Repository.from_payload(data).should eql(repo)
+    end
+
+    it "updates the existing repository" do
+      repo.update(forks: 100)
+      Repository.from_payload(data)
+      repo.forks.should eql(1)
+    end
+  end
 end
