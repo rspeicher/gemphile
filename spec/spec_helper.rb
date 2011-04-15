@@ -1,6 +1,13 @@
-$:.unshift File.expand_path("../../lib", File.dirname(__FILE__))
+$:.unshift File.expand_path("../..", __FILE__)
+$:.unshift File.expand_path("../../lib", __FILE__)
 
-require 'gemfile_reader'
+ENV['RACK_ENV'] = 'test'
+
+require 'gemphile'
+
+require 'database_cleaner'
+require 'fakeweb'
+require 'rack/test'
 
 module SpecHelpers
   def gemfile(name)
@@ -21,4 +28,18 @@ RSpec.configure do |config|
   config.run_all_when_everything_filtered = true
 
   config.include SpecHelpers
+
+  config.before(:suite) do
+    FakeWeb.allow_net_connect = false
+
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 end
