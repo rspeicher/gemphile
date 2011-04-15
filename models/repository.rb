@@ -11,6 +11,11 @@ class Repository
   field :watchers,    type: Integer
   field :forks,       type: Integer
 
+  # Creates or updates a record based on a payload from a GitHub post-commit
+  # hook
+  #
+  # @param [String] payload Raw payload string, to be parsed into JSON
+  # @return [Repository] saved repository instance
   def self.from_payload(payload)
     return unless payload.is_a?(String)
 
