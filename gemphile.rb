@@ -6,7 +6,8 @@ require 'json'
 require 'mongoid'
 require 'sinatra/base'
 
-require 'models/all'
+require_relative 'jobs/gemfile_job'
+require_relative 'models/all'
 
 class Gemphile < Sinatra::Base
   configure do
