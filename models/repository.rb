@@ -53,7 +53,7 @@ class Repository
       gems = JSON.parse(gemstr)
 
       # Remove old gem entries before we add new ones
-      self.gems.destroy_all if gems.length > 0
+      self.gems.each(&:destroy) if gems.length > 0
 
       gems.each do |gem|
         self.gems.create(name: gem['name'], version: gem['version'])

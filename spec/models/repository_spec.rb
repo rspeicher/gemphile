@@ -91,6 +91,28 @@ describe Repository do
         repo.gems.any? { |g| g.name == 'rails' }.should be_false
         repo.gems.any? { |g| g.name == 'cucumber' }.should be_true
       end
+
+      it "updates GemCount after create" do
+        3.times do
+          repo = Factory(:repository)
+          repo.gems.create(name: 'gemphile')
+        end
+
+        GemCount.find('gemphile').count.should eql(3)
+      end
+
+      it "updates GemCount after destroy" do
+        3.times do
+          repo = Factory(:repository)
+          repo.gems.create(name: 'gemphile')
+        end
+
+        # FIXME: This is the only way to get this test to pass
+        # - Repository.last.destroy fails because it doesn't cascade the callback to its embedded docs
+        # - Repository.last.gems.destroy_all fails because... I don't know
+        Repository.last.gems.each(&:destroy)
+        GemCount.find('gemphile').count.should eql(2)
+      end
     end
 
     context "given empty data" do

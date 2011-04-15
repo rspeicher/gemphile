@@ -14,7 +14,7 @@ end
 guard 'rspec', :cli => '-d --format documentation' do
   watch('gemphile.rb')         { 'spec/gemphile_spec.rb' }
   watch(%r{^spec/.+_spec\.rb})
-  watch(%r{^models/(.+)\.rb})  { |m| "spec/models/#{m[1]}_spec.rb" }
+  watch(%r{^models/(.+)\.rb})  { |m| "spec/models" }
   watch(%r{^lib/(.+)\.rb})     { |m| "spec/#{m[1]}_spec.rb" }
   watch('spec/spec_helper.rb') { "spec" }
   watch(%r{^spec/fixtures/})   { "spec" }
