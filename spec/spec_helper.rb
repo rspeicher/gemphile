@@ -1,8 +1,6 @@
-$:.unshift File.expand_path("../..", __FILE__)
-
 ENV['RACK_ENV'] = 'test'
 
-require 'gemphile'
+require_relative '../gemphile'
 
 require 'database_cleaner'
 require 'fakeweb'
@@ -15,16 +13,6 @@ module SpecHelpers
 
   def payload(name)
     File.read(File.expand_path("./fixtures/github_payloads/#{name}.json", File.dirname(__FILE__)))
-  end
-
-  def gemfile(name)
-    File.read(File.expand_path("./fixtures/gemfiles/#{name}.rb", File.dirname(__FILE__)))
-  end
-
-  # Assumes `let(:gems)` has been defined
-  def find_gem(name, index = 0)
-    return unless gems
-    gems.find_all { |g| g.name == name }[index]
   end
 end
 

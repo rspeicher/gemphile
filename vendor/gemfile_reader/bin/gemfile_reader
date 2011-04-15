@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require 'json'
+require_relative '../lib/gemfile_reader'
+
+begin
+  gems = GemfileReader.evaluate(ARGF.read)
+  puts gems.collect(&:to_hash).to_json
+rescue Exception
+  puts [].to_json
+end

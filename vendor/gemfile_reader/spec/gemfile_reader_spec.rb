@@ -1,7 +1,5 @@
-require 'spec_helper'
+require_relative 'spec_helper'
 require 'fileutils'
-
-require 'gemfile_reader'
 
 describe GemfileReader do
   context "with a simple Gemfile" do
