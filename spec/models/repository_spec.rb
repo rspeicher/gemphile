@@ -17,12 +17,12 @@ describe Repository do
       end
 
       it "ignores private repositories" do
-        expect { Repository.from_payload(payload('private_repo')) }.to_not change(Repository, :count)
+        expect { Repository.from_payload(github('private_repo')) }.to_not change(Repository, :count)
       end
     end
 
     context "given valid data" do
-      let(:repo) { Repository.from_payload(payload('initial_push')) }
+      let(:repo) { Repository.from_payload(github('initial_push')) }
 
       it "extracts owner name" do
         repo.owner.should eql('tsigo')
@@ -58,7 +58,7 @@ describe Repository do
     end
 
     context "given data for a repository we've already seen" do
-      let(:data) { payload('initial_push') }
+      let(:data) { github('initial_push') }
       let(:repo) { Repository.from_payload(data) }
 
       it "returns the existing repository" do

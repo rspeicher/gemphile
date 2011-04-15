@@ -11,7 +11,11 @@ module SpecHelpers
     Gemphile
   end
 
-  def payload(name)
+  def gemfile(name)
+    File.read(File.expand_path("./fixtures/gemfile_payloads/#{name}.json", File.dirname(__FILE__)))
+  end
+
+  def github(name)
     File.read(File.expand_path("./fixtures/github_payloads/#{name}.json", File.dirname(__FILE__)))
   end
 end

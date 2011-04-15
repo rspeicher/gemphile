@@ -8,7 +8,7 @@ describe Gemphile do
       Repository.expects(:from_payload).once.returns(Repository.new)
       Delayed::Job.expects(:enqueue).with { |v| v.class == GemfileJob }
 
-      post '/push', :payload => payload('initial_push')
+      post '/push', :payload => github('initial_push')
       last_response.should be_ok
     end
 
