@@ -2,6 +2,14 @@ require 'spec_helper'
 
 describe Repository, "#from_payload" do
   context "given invalid or private data" do
+    it "ignores Hash data" do
+      Repository.from_payload(foo: 'bar').should be_nil
+    end
+
+    it "rescues from a JSON parse error" do
+      expect { Repository.from_payload('') }.to_not raise_error
+    end
+
     it "ignores payloads without repository info" do
       payload = %{{"name": "repo"}}
       expect { Repository.from_payload(payload) }.to_not change(Repository, :count)

@@ -12,19 +12,24 @@ class Repository
   field :forks,       type: Integer
 
   def self.from_payload(payload)
-    payload = JSON.parse(payload)
+    return unless payload.is_a?(String)
 
-    fields = %w(owner name description fork url homepage watchers forks)
+    begin
+      payload = JSON.parse(payload)
 
-    if repo = payload['repository']
-      return if repo['private']
+      fields = %w(owner name description fork url homepage watchers forks)
 
-      repo.select! { |k,v| fields.include? k }
-      repo['owner'] = repo['owner']['name']
+      if repo = payload['repository']
+        return if repo['private']
 
-      record = find_or_initialize_by(owner: repo['owner'], name: repo['name'])
-      record.update_attributes(repo)
-      record
+        repo.select! { |k,v| fields.include? k }
+        repo['owner'] = repo['owner']['name']
+
+        record = find_or_initialize_by(owner: repo['owner'], name: repo['name'])
+        record.update_attributes(repo)
+        record
+      end
+    rescue JSON::ParserError => ignored
     end
   end
 end
