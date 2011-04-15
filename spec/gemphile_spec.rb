@@ -1,11 +1,20 @@
 require 'spec_helper'
 
-describe Gemphile, "POST /push" do
-  include Rack::Test::Methods
+describe Gemphile do
+  describe "POST /push" do
+    include Rack::Test::Methods
 
-  it "calls Repository.from_payload" do
-    Repository.expects(:from_payload).once
-    post '/push', :payload => payload('initial_push')
+    it "calls Repository.from_payload and enqueues a GemfileJob" do
+      Repository.expects(:from_payload).once.returns(Repository.new)
+      Delayed::Job.expects(:enqueue).with { |v| v.class == GemfileJob }
+
+      post '/push', :payload => payload('initial_push')
+      last_response.should be_ok
+    end
+
+    it "returns 500 when given a bad payload" do
+      post '/push', :payload => ""
+      last_response.should_not be_ok
+    end
   end
 end
-

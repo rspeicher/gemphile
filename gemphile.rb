@@ -18,7 +18,11 @@ class Gemphile < Sinatra::Base
   end
 
   post '/push' do
-    Repository.from_payload(params[:payload])
-    status(200)
+    if repo = Repository.from_payload(params['payload'])
+      Delayed::Job.enqueue GemfileJob.new(repo.id)
+      status(200)
+    else
+      status(500)
+    end
   end
 end
