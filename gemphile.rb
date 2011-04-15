@@ -16,6 +16,7 @@ class Gemphile < Sinatra::Base
     Mongoid.configure do |config|
       config.master = Mongo::Connection.new.db("gemphile_#{ENV['RACK_ENV']}")
       config.allow_dynamic_fields = false
+      config.autocreate_indexes   = true unless production?
     end
   end
 

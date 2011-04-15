@@ -5,11 +5,13 @@ class Repository
   field :owner,       type: String
   field :name,        type: String
   field :description, type: String
-  field :fork,        type: Boolean
+  field :fork,        type: Boolean, default: false
   field :url,         type: String
   field :homepage,    type: String
-  field :watchers,    type: Integer
-  field :forks,       type: Integer
+  field :watchers,    type: Integer, default: 1
+  field :forks,       type: Integer, default: 1
+
+  index [[:owner, Mongo::ASCENDING], [:name, Mongo::ASCENDING]], unique: true
 
   embeds_many :gem_entries
   alias_method :gems, :gem_entries
