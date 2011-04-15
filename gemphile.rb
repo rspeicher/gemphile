@@ -9,6 +9,8 @@ require 'sinatra/base'
 require_relative 'jobs/gemfile_job'
 require_relative 'models/all'
 
+ENV['RACK_ENV'] ||= 'development'
+
 class Gemphile < Sinatra::Base
   configure do
     Mongoid.configure do |config|
