@@ -10,9 +10,13 @@ group :development, :test do
 end
 
 group :test do
+  gem 'fakeweb', '~> 1.3'
+  gem 'rack-test'
+
   gem 'growl'
 
   gem 'guard', '~> 0.3'
   gem 'guard-bundler'
+  gem 'guard-pow'
   gem 'guard-rspec'
 end
