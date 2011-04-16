@@ -16,6 +16,10 @@ class Repository
   embeds_many :gem_entries
   alias_method :gems, :gem_entries
 
+  def to_s
+    "#{owner}/#{name}"
+  end
+
   # Creates or updates a record based on a payload from a GitHub post-commit
   # hook
   #
