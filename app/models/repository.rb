@@ -25,18 +25,19 @@ class Repository
     return unless payload.is_a?(String)
 
     begin
-      payload = JSON.parse(payload)
+      payload = Payload.new(payload)
 
-      fields = %w(owner name description fork url homepage watchers forks)
-
-      if repo = payload['repository']
+      if repo = payload.repository
         return if repo['private']
 
+        fields = %w(owner name description fork url homepage watchers forks)
         repo.select! { |k,v| fields.include? k }
         repo['owner'] = repo['owner']['name']
 
         record = find_or_initialize_by(owner: repo['owner'], name: repo['name'])
+        record.queue_gemfile_update if record.new_record? || payload.modified_gemfile?
         record.update_attributes(repo)
+
         record
       end
     rescue JSON::ParserError => ignored
@@ -50,15 +51,20 @@ class Repository
     return unless gemstr.is_a?(String)
 
     begin
-      gems = JSON.parse(gemstr)
+      new_gems = JSON.parse(gemstr)
 
       # Remove old gem entries before we add new ones
-      self.gems.each(&:destroy) if gems.length > 0
+      self.gems.each(&:destroy) if new_gems.length > 0
 
-      gems.each do |gem|
+      new_gems.each do |gem|
         self.gems.create(name: gem['name'], version: gem['version'])
       end
     rescue JSON::ParserError => ignored
     end
+  end
+
+  # Enqueues a {GemfileJob} for this record
+  def queue_gemfile_update
+    Delayed::Job.enqueue GemfileJob.new(self.id)
   end
 end

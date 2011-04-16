@@ -66,6 +66,10 @@ describe Repository do
       let(:data) { github('initial_push') }
       let(:repo) { Repository.from_payload(data) }
 
+      before do
+        repo.populate_gems(gemfile('simplest'))
+      end
+
       context "payload contains no Gemfile modifications" do
         it "returns the existing repository" do
           Repository.from_payload(data).should eql(repo)
@@ -76,16 +80,20 @@ describe Repository do
           Repository.from_payload(data)
           repo.forks.should eql(1)
         end
+
+        it "does not enqueue GemfileJob" do
+          Delayed::Job.expects(:enqueue).never
+          Repository.from_payload(data)
+        end
       end
 
-      context "payload contains Gemfile modifications" do
+      context "when payload contains Gemfile modifications" do
         it "enqueues GemfileJob for work" do
           Delayed::Job.expects(:enqueue).with { |v| v.class == GemfileJob }
 
           # Use a payload that contains Gemfile modifications in the same
           # repository as "initial_push" from above
-          modified = Repository.from_payload(github('modify_gemfile'))
-          modified.should eql(repo)
+          Repository.from_payload(github('modify_gemfile'))
         end
       end
     end

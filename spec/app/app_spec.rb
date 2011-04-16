@@ -6,8 +6,6 @@ describe Gemphile::App do
 
     it "calls Repository.from_payload and enqueues a GemfileJob" do
       Repository.expects(:from_payload).once.returns(Repository.new)
-      Delayed::Job.expects(:enqueue).with { |v| v.class == GemfileJob }
-
       post '/push', :payload => github('initial_push')
       last_response.should be_ok
     end

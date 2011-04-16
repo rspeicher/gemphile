@@ -15,6 +15,7 @@ require_relative 'helpers'
 require_relative 'jobs/gemfile_job'
 require_relative 'models/gem_count'
 require_relative 'models/gem_entry'
+require_relative 'models/payload'
 require_relative 'models/repository'
 
 Mongoid.configure do |config|
