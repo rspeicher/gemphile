@@ -11,10 +11,14 @@ class Repository
   field :watchers,    type: Integer, default: 1
   field :forks,       type: Integer, default: 1
 
-  index [[:owner, Mongo::ASCENDING], [:name, Mongo::ASCENDING]], unique: true
-
   embeds_many :gem_entries
   alias_method :gems, :gem_entries
+
+  index [[:owner, Mongo::ASCENDING], [:name, Mongo::ASCENDING]], unique: true
+
+  validates_presence_of :owner
+  validates_presence_of :name
+  validates_format_of :url, with: %r{^https?://github\.com/.*}
 
   def to_s
     "#{owner}/#{name}"
