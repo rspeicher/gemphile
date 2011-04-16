@@ -16,3 +16,9 @@ require_relative 'jobs/gemfile_job'
 require_relative 'models/gem_count'
 require_relative 'models/gem_entry'
 require_relative 'models/repository'
+
+Mongoid.configure do |config|
+  config.master = Mongo::Connection.new.db("gemphile_#{RACK_ENV}")
+  config.allow_dynamic_fields = false
+  config.autocreate_indexes   = true unless RACK_ENV == 'production'
+end
