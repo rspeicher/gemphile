@@ -2,14 +2,19 @@ require 'rspec/core/rake_task'
 
 task :default => :spec
 
-desc "Run specs"
+desc "Run Gemphile specs"
 RSpec::Core::RakeTask.new do |t|
-  t.pattern = ["./spec/**/*_spec.rb","./vendor/**/spec/**/*_spec.rb"]
+  t.pattern = ["./spec/**/*_spec.rb"]
+end
+
+desc "Run GemfileReader specs"
+RSpec::Core::RakeTask.new do |t|
+  t.pattern = ["./vendor/gemfile_reader/spec/**/*_spec.rb"]
 end
 
 namespace :jobs do
   task :environment do
-    require_relative 'gemphile'
+    require_relative 'app/libraries'
   end
 
   desc "Clear the delayed_job queue."

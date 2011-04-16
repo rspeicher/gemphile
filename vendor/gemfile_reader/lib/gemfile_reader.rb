@@ -1,3 +1,8 @@
+if [:Gemphile, :Repository, :GemCount].any? { |o| Object.const_defined?(o) }
+  puts "GemfileReader must be run outside the Gemphile environment."
+  exit
+end
+
 # = GemfileReader
 #
 # Reads a Gemfile definition from a file and returns information about
