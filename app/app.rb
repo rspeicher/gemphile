@@ -16,7 +16,6 @@ module Gemphile
 
     post '/push' do
       if repo = Repository.from_payload(params['payload'])
-        Delayed::Job.enqueue GemfileJob.new(repo.id)
         status(200)
       else
         status(500)
