@@ -9,6 +9,7 @@ gem 'delayed_job',         '~> 2.1'
 gem 'delayed_job_mongoid', '~> 1.0'
 
 group :development, :test do
+  gem 'capistrano'
   gem 'mocha'
   gem 'rspec', '~> 2.5'
   gem 'ruby-debug19'
@@ -27,4 +28,8 @@ group :test do
   gem 'guard-bundler'
   gem 'guard-pow'
   gem 'guard-rspec'
+end
+
+group :production do
+  gem 'thin', '~> 1.2'
 end
