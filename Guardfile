@@ -13,14 +13,15 @@ guard 'pow' do
 end
 
 guard 'rspec', :cli => '-d --format documentation' do
-  watch('gemphile.rb')         { 'spec/gemphile_spec.rb' }
+  watch('app/app.rb')             { 'spec/app/app_spec.rb' }
   watch(%r{^spec/.+_spec\.rb})
   watch(%r{^app/models/(.+)\.rb}) { |m| "spec/app/models" }
-  watch(%r{^lib/(.+)\.rb})     { |m| "spec/#{m[1]}_spec.rb" }
-  watch('spec/spec_helper.rb') { "spec" }
-  watch(%r{^spec/fixtures/})   { "spec" }
+  watch(%r{^lib/(.+)\.rb})        { |m| "spec/#{m[1]}_spec.rb" }
+  watch('spec/spec_helper.rb')    { "spec" }
+  watch(%r{^spec/fixtures/})      { "spec" }
 
-  watch('spec/spec_helper.rb') { "spec" }
+  watch('spec/spec_helper.rb')    { "spec" }
+  watch('spec/factories.rb')      { "spec" }
   watch(%r{^spec/.+_spec\.rb})
-  watch(%r{^lib/(.+)\.rb})     { |m| "spec/lib/#{m[1]}_spec.rb" }
+  watch(%r{^lib/(.+)\.rb})        { |m| "spec/lib/#{m[1]}_spec.rb" }
 end
