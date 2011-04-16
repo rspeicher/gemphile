@@ -8,7 +8,8 @@ guard 'pow' do
   watch('.rvmrc')
   watch('Gemfile')
   watch('Gemfile.lock')
-  watch('app.rb')
+  watch('app/app.rb')
+  watch(%r{app/helpers})
 end
 
 guard 'rspec', :cli => '-d --format documentation' do
@@ -19,7 +20,7 @@ guard 'rspec', :cli => '-d --format documentation' do
   watch('spec/spec_helper.rb') { "spec" }
   watch(%r{^spec/fixtures/})   { "spec" }
 
-  watch('spec/spec_helper.rb')                       { "spec" }
+  watch('spec/spec_helper.rb') { "spec" }
   watch(%r{^spec/.+_spec\.rb})
-  watch(%r{^lib/(.+)\.rb})                           { |m| "spec/lib/#{m[1]}_spec.rb" }
+  watch(%r{^lib/(.+)\.rb})     { |m| "spec/lib/#{m[1]}_spec.rb" }
 end

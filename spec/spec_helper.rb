@@ -1,6 +1,8 @@
 ENV['RACK_ENV'] = 'test'
 
-require_relative '../gemphile'
+$:.unshift(File.expand_path('..', File.dirname(__FILE__)))
+
+require_relative '../app/app'
 require_relative 'factories'
 
 require 'database_cleaner'
@@ -9,7 +11,7 @@ require 'rack/test'
 
 module SpecHelpers
   def app
-    Gemphile
+    Gemphile::App
   end
 
   def gemfile(name)

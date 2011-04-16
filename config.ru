@@ -1,2 +1,6 @@
-require File.expand_path('../gemphile', __FILE__)
-run Gemphile
+unless $LOAD_PATH.include? '.'
+  $LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__)))
+end
+
+require 'app/app'
+run Gemphile::App.new

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Gemphile do
+describe Gemphile::App do
   describe "POST /push" do
     include Rack::Test::Methods
 
