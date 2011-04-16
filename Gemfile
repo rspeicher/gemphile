@@ -4,6 +4,7 @@ gem 'sinatra',  '~> 1.2'
 gem 'mongoid',  '~> 2.0'
 gem 'bson_ext', '~> 1.3'
 
+gem 'curb',                '~> 0.7'
 gem 'delayed_job',         '~> 2.1'
 gem 'delayed_job_mongoid', '~> 1.0'
 

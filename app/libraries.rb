@@ -5,6 +5,7 @@ require 'json'
 
 # bundled
 require 'bundler/setup'
+require 'curb'
 require 'delayed_job'
 require 'delayed_job_mongoid'
 require 'mongoid'

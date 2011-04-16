@@ -1,21 +1,24 @@
 class GemfileJob < Struct.new(:repo_id)
   def perform
     repo = Repository.find(repo_id)
-    url  = "https://github.com/#{repo.owner}/#{repo.name}/raw/HEAD/Gemfile"
+    url  = repo.url + '/raw/HEAD/Gemfile'
 
     filename = "tmp/#{object_id}.gemfile"
 
     # Make sure Gemfile exists
-    # FIXME: Any easy way to do this without hitting it twice?
-    if `curl -I #{url}` =~ /Status: 200 OK/
+    if Curl::Easy.http_head(url).response_code == 200
       # Download it
-      `curl #{url} -o #{filename}`
+      body = Curl::Easy.http_get(url).body_str
+      File.open(filename, 'w') { |f| f.puts body }
 
       # Run it through GemfileReader
       gems = `vendor/gemfile_reader/bin/gemfile_reader #{filename}`.strip
+
+      # Pass the returned JSON string to populate_gems
       repo.populate_gems(gems)
 
-      `rm -f #{filename}`
+      # Remove the local file
+      File.unlink(filename) if File.exists?(filename)
     end
   end
 end
