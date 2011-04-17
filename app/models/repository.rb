@@ -20,6 +20,8 @@ class Repository
   validates_presence_of :name
   validates_format_of :url, with: %r{^https?://github\.com/.*}
 
+  after_create :queue_gemfile_update
+
   def to_s
     "#{owner}/#{name}"
   end
@@ -43,7 +45,7 @@ class Repository
         repo['owner'] = repo['owner']['name']
 
         record = find_or_initialize_by(owner: repo['owner'], name: repo['name'])
-        record.queue_gemfile_update if record.new_record? || payload.modified_gemfile?
+        record.queue_gemfile_update if !record.new_record? && payload.modified_gemfile?
         record.update_attributes(repo)
 
         record

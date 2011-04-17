@@ -1,11 +1,11 @@
 {
-  "after": "843fe89a6aec9555daba2f3570ac285120a66cef", 
+  "after": "6a46fc0cb8479208bf85d7ffb0793b7478fc0585", 
   "base_ref": null, 
-  "before": "0000000000000000000000000000000000000000", 
+  "before": "843fe89a6aec9555daba2f3570ac285120a66cef", 
   "commits": [
     {
       "added": [
-        "README.md"
+        "lib\/.gitkeep"
       ], 
       "author": {
         "email": "rspeicher@gmail.com", 
@@ -13,18 +13,35 @@
         "username": "tsigo"
       }, 
       "distinct": true, 
-      "id": "843fe89a6aec9555daba2f3570ac285120a66cef", 
-      "message": "Add README", 
+      "id": "7f085bc9782f5a212cc5a45ccb7bbc30574f6e62", 
+      "message": "Add lib directory", 
       "modified": [], 
       "removed": [], 
-      "timestamp": "2011-04-11T13:15:32-07:00", 
-      "url": "https:\/\/github.com\/tsigo\/hook_test\/commit\/843fe89a6aec9555daba2f3570ac285120a66cef"
+      "timestamp": "2011-04-11T13:16:32-07:00", 
+      "url": "https:\/\/github.com\/tsigo\/hook_test\/commit\/7f085bc9782f5a212cc5a45ccb7bbc30574f6e62"
+    }, 
+    {
+      "added": [
+        "Gemfile"
+      ], 
+      "author": {
+        "email": "rspeicher@gmail.com", 
+        "name": "Robert Speicher", 
+        "username": "tsigo"
+      }, 
+      "distinct": true, 
+      "id": "6a46fc0cb8479208bf85d7ffb0793b7478fc0585", 
+      "message": "Add Gemfile", 
+      "modified": [], 
+      "removed": [], 
+      "timestamp": "2011-04-11T13:16:43-07:00", 
+      "url": "https:\/\/github.com\/tsigo\/hook_test\/commit\/6a46fc0cb8479208bf85d7ffb0793b7478fc0585"
     }
   ], 
-  "compare": "https:\/\/github.com\/tsigo\/hook_test\/compare\/843fe89^...843fe89", 
-  "created": true, 
+  "compare": "https:\/\/github.com\/tsigo\/hook_test\/compare\/843fe89...6a46fc0", 
+  "created": false, 
   "deleted": false, 
-  "forced": true, 
+  "forced": false, 
   "pusher": {
     "email": "rspeicher@gmail.com", 
     "name": "tsigo"
@@ -46,8 +63,8 @@
       "name": "tsigo"
     }, 
     "private": false, 
-    "pushed_at": "2011\/04\/11 13:15:40 -0700", 
-    "size": 0, 
+    "pushed_at": "2011\/04\/11 13:16:46 -0700", 
+    "size": 108, 
     "url": "https:\/\/github.com\/tsigo\/hook_test", 
     "watchers": 1
   }
