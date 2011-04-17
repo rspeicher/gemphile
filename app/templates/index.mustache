@@ -1,5 +1,13 @@
+<h2>Popular gems</h2>
 <ul>
   {{# gems }}
-  <li><a href="/{{ name }}">{{ name }}</a>: {{ count }}</li>
+  <li>{{ count }}: <a href="/{{ name }}">{{ name }}</a></li>
   {{/ gems }}
+</ul>
+
+<h2>Latest projects</h2>
+<ul>
+  {{# repos }}
+  <li><a href="{{ url }}">{{ to_s }}</a></li>
+  {{/ repos }}
 </ul>
