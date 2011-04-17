@@ -10,6 +10,7 @@ set :domain,      "tsigo.com"
 set :repository,  "git@tsigo.com:#{application}.git"
 set :scm,         'git'
 set :branch,      'master'
+set :app_server,  :passenger
 
 set :use_sudo, false
 set :keep_releases, 3
@@ -20,6 +21,26 @@ set :ssh_options, { :forward_agent => true, :keys => "/Users/tsigo/.ssh/id_rsa" 
 role :app, domain
 role :web, domain
 role :db,  domain, :primary => true
+
+namespace :deploy do
+  task :start, :roles => :app do
+    run "touch #{current_release}/tmp/restart.txt"
+  end
+
+  task :stop, :roles => :app do
+    # Do nothing.
+  end
+
+  desc 'Restart Application'
+  task :restart, :roles => :app do
+    run "touch #{current_release}/tmp/restart.txt"
+  end
+
+  desc 'Symlink the thin config'
+  task :symlink_settings, :roles => :app do
+    run "ln -s #{shared_path}/thin.yml #{current_release}/config/thin.yml"
+  end
+end
 
 # DelayedJob
 namespace :delayed_job do
