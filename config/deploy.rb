@@ -6,7 +6,7 @@ set :application, "gemphile"
 set :deploy_to,   "/home/tsigo/rails/#{application}"
 set :rails_env,   "production"
 
-set :domain,      "gluttony"
+set :domain,      "tsigo.com"
 set :repository,  "git@tsigo.com:#{application}.git"
 set :scm,         'git'
 set :branch,      'master'

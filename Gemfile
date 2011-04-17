@@ -1,5 +1,7 @@
 source :rubygems
 
+gem 'rake'
+
 gem 'sinatra',  '~> 1.2'
 gem 'mongoid',  '~> 2.0'
 gem 'bson_ext', '~> 1.3'

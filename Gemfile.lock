@@ -121,6 +121,7 @@ DEPENDENCIES
   mongoid (~> 2.0)
   mustache (~> 0.99)
   rack-test
+  rake
   rspec (~> 2.5)
   ruby-debug19
   sinatra (~> 1.2)
