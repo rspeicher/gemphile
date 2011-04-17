@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require 'daemons'
+
+$:.unshift(File.expand_path('..', File.dirname(__FILE__)))
+
+Daemons.run_proc('gemphile_worker') do
+  require 'app/libraries'
+  Delayed::Worker.new.start
+end

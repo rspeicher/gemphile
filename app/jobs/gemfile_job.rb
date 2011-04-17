@@ -4,7 +4,7 @@ class GemfileJob < Struct.new(:id)
     puts "Updating #{repo.to_s}"
     url  = repo.url + '/raw/HEAD/Gemfile'
 
-    filename = "tmp/#{object_id}.gemfile"
+    filename = "#{RACK_ROOT}/tmp/#{object_id}.gemfile"
 
     # Make sure Gemfile exists
     if Curl::Easy.http_head(url).response_code == 200
@@ -16,7 +16,7 @@ class GemfileJob < Struct.new(:id)
 
       # Run it through GemfileReader
       puts "  Reading Gemfile"
-      gems = `vendor/gemfile_reader/bin/gemfile_reader #{filename}`.strip
+      gems = `#{RACK_ROOT}/vendor/gemfile_reader/bin/gemfile_reader #{filename}`.strip
 
       # Pass the returned JSON string to populate_gems
       puts "  Populating gems"
