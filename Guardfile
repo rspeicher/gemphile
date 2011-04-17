@@ -9,8 +9,7 @@ guard 'pow' do
   watch('Gemfile')
   watch('Gemfile.lock')
   watch('app/app.rb')
-  watch(%r{app/helpers})
-  watch(%r{app/views})
+  watch(%r{app/.+})
 end
 
 guard 'rspec', :cli => '-d --format documentation' do

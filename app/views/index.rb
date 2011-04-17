@@ -1,7 +1,8 @@
 module Views
   class Index < Layout
     def gems
-      GemCount.order_by([[:count, :desc], [:name, :asc]]).limit(100).to_ary
+      # TODO: Limit?
+      Repository.gem_counts.sort { |a, b| b[:count] <=> a[:count] }
     end
 
     def repos

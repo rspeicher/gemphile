@@ -1,6 +1,7 @@
 class Repository
   include Mongoid::Document
   include Mongoid::Timestamps
+  include GemCount
 
   field :owner,       type: String
   field :name,        type: String
@@ -64,11 +65,13 @@ class Repository
       new_gems = JSON.parse(gemstr)
 
       # Remove old gem entries before we add new ones
-      self.gems.each(&:destroy) if new_gems.length > 0
+      self.gems.destroy_all if new_gems.length > 0
 
       new_gems.each do |gem|
         self.gems.create(name: gem['name'], version: gem['version'])
       end
+
+      self.save
     rescue JSON::ParserError => ignored
     end
   end

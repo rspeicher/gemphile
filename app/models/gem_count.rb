@@ -1,26 +1,59 @@
-class GemCount
-  include Mongoid::Document
+# = GemCount
+#
+# Helper module to store a collection containing gem usage counts.
+#
+# Thanks to https://github.com/wilkerlucio/mongoid_taggable for a starting
+# point.
+module GemCount
+  def self.included(base)
+    base.after_save do |document|
+      document.class.save_gems_index!
+    end
 
-  field :name, type: String
-  field :count, type: Integer, default: 0
+    base.after_destroy do |document|
+      document.class.save_gems_index!
+    end
 
-  index :name, unique: true
-  key :name
-
-  def self.increment(name)
-    self.update_count(name, 1)
+    base.extend(ClassMethods)
   end
 
-  def self.decrement(name)
-    self.update_count(name, -1)
-  end
+  module ClassMethods
+    def gem_counts
+      db = Mongoid::Config.master
+      db.collection(gems_index_collection).find.each_with_object([]) do |r, o|
+        o << {name: r['_id'], count: r['value'].to_i}
+      end
+    end
 
-  def self.update_count(name, value)
-    gc = self.find_or_initialize_by(name: name)
+    def gems_index_collection
+      "#{collection_name}_gem_counts_index"
+    end
 
-    count = gc.count+value < 0 ? 0 : gc.count+value
-    gc.update_attribute(:count, count)
+    def save_gems_index!
+      db = Mongoid::Config.master
+      coll = db.collection(collection_name)
 
-    gc
+      map = "function() {
+        if (!this.gem_entries) {
+          return;
+        }
+
+        for (index in this.gem_entries) {
+          emit(this.gem_entries[index].name, 1);
+        }
+      }"
+
+      reduce = "function(previous, current) {
+        var count = 0;
+
+        for (index in current) {
+          count += current[index]
+        }
+
+        return count;
+      }"
+
+      coll.map_reduce(map, reduce, :out => gems_index_collection)
+    end
   end
 end
