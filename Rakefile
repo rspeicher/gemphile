@@ -14,6 +14,15 @@ unless ENV['RACK_ENV'] == 'production'
   end
 end
 
+desc "Console"
+task :console do
+  ARGV.pop
+  require_relative 'app/libraries'
+  require 'irb'
+  require 'irb/completion'
+  IRB.start
+end
+
 namespace :jobs do
   task :environment do
     require_relative 'app/libraries'
