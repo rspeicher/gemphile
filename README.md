@@ -11,11 +11,6 @@ get a list of projects that require that gem in their Gemfile.
 Gemphile makes use of GitHub's post-receive hooks to discover new projects and
 to know when an existing project's Gemfile has been modified.
 
-## Caveats
-
-* Processes Gemfile `gem` directives only. Nothing in a `gemspec` file will
-  currently be processed.
-
 ## Contributing
 
 There's still plenty of work to be done, particularly on the front-end.
@@ -50,7 +45,6 @@ Basically:
 ### TODO
 
 * **Front-end!**
-* `gemspec` reading.
 
 ## Copyright
 
