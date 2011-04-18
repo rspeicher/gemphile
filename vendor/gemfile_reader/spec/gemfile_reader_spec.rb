@@ -68,12 +68,12 @@ describe GemfileReader do
     let(:gems) { GemfileReader.evaluate(gemfile('rails')) }
 
     it "should read arel correctly" do
-      gem = find_gem('arel', 1)
+      gem = find_gem('arel')
 
       gem.name.should    eql('arel')
       gem.version.should be_nil
-      gem.path.should    be_nil
-      gem.git.should     eql("git://github.com/rails/arel.git")
+      gem.path.should    eql('')
+      gem.git.should     be_nil
     end
 
     it "should read RedCloth correctly" do
@@ -92,6 +92,10 @@ describe GemfileReader do
       gem.version.should eql('>= 0.10.3')
       gem.path.should    be_nil
       gem.git.should     be_nil
+    end
+
+    it "returns unique entries by name" do
+      gems.select { |g| g.name == 'arel' }.length.should eql(1)
     end
   end
 

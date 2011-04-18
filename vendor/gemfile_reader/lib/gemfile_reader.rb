@@ -8,6 +8,13 @@ end
 # Reads a Gemfile definition from a file and returns information about
 # the gems specified.
 class GemfileReader
+  # Special Array that makes sure the gems added to it are unique by name
+  class Gems < Array
+    def <<(gem)
+      super if self.none? { |g| g.name == gem.name }
+    end
+  end
+
   # Represents a single <tt>gem</tt> entry in a gemfile
   class Entry < Struct.new(:name, :version, :path, :git)
     # Converts the object to a <tt>Hash</tt>
@@ -68,7 +75,7 @@ class GemfileReader
     attr_reader :gems
 
     def initialize
-      @gems = []
+      @gems = Gems.new
     end
 
     protected

@@ -8,9 +8,9 @@ module SpecHelpers
   end
 
   # Assumes `let(:gems)` has been defined
-  def find_gem(name, index = 0)
+  def find_gem(name)
     return unless gems
-    gems.find_all { |g| g.name == name }[index]
+    gems.find { |g| g.name == name }
   end
 end
 
