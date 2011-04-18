@@ -7,6 +7,7 @@ require_relative 'factories'
 
 require 'database_cleaner'
 require 'rack/test'
+require 'webmock/rspec'
 
 module SpecHelpers
   def app
@@ -31,6 +32,7 @@ RSpec.configure do |config|
   config.include SpecHelpers
 
   config.before(:suite) do
+    WebMock.disable_net_connect!
     DatabaseCleaner.clean_with(:truncation)
   end
 

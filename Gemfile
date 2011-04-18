@@ -20,9 +20,9 @@ end
 
 group :test do
   gem 'database_cleaner'
+  gem 'factory_girl',    '~> 1.3'
   gem 'rack-test'
-
-  gem 'factory_girl', '~> 1.3'
+  gem 'webmock',         '~> 1.6'
 
   gem 'growl'
 
