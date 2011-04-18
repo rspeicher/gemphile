@@ -6,7 +6,6 @@ require_relative '../app/app'
 require_relative 'factories'
 
 require 'database_cleaner'
-require 'fakeweb'
 require 'rack/test'
 
 module SpecHelpers
@@ -32,8 +31,6 @@ RSpec.configure do |config|
   config.include SpecHelpers
 
   config.before(:suite) do
-    FakeWeb.allow_net_connect = false
-
     DatabaseCleaner.clean_with(:truncation)
   end
 

@@ -20,7 +20,6 @@ end
 
 group :test do
   gem 'database_cleaner'
-  gem 'fakeweb', '~> 1.3'
   gem 'rack-test'
 
   gem 'factory_girl', '~> 1.3'
