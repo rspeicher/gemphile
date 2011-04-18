@@ -43,7 +43,7 @@ class Repository
 
         fields = %w(owner name description fork url homepage watchers forks)
         repo.select! { |k,v| fields.include? k }
-        repo['owner'] = repo['owner']['name']
+        repo['owner'] = repo['owner']['name'] unless repo['owner'].is_a?(String)
 
         record = find_or_initialize_by(owner: repo['owner'], name: repo['name'])
         record.queue_gemfile_update if !record.new_record? && payload.modified_gemfile?

@@ -21,7 +21,7 @@ describe Repository do
       end
     end
 
-    context "given valid data" do
+    context "given valid post-receieve data" do
       let(:repo) { Repository.from_payload(github('push/initial_push')) }
 
       it "extracts owner name" do
@@ -62,7 +62,20 @@ describe Repository do
       end
     end
 
-    context "given data for a repository we've already seen" do
+    context "given valid API data" do
+      let(:repo) { Repository.from_payload(github('repo/resque')) }
+
+      it "sets owner name" do
+        repo.owner.should eql('defunkt')
+      end
+
+      it "enqueues GemfileJob for work" do
+        Delayed::Job.expects(:enqueue).with { |v| v.class == GemfileJob }
+        repo.should be_valid
+      end
+    end
+
+    context "given post-receive data for a repository we've already seen" do
       let(:data) { github('push/initial_push') }
       let(:repo) { Repository.from_payload(data) }
 
