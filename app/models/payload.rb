@@ -20,8 +20,9 @@ class Payload
   # Checks additions, removals and modifications
   #
   # @return [Boolean]
+  # @todo TODO: Check for gemspec?
   def modified_gemfile?
-    commits.any? do |c|
+    commits && commits.any? do |c|
       c['added'].include?('Gemfile') ||
       c['modified'].include?('Gemfile') ||
       c['removed'].include?('Gemfile')
