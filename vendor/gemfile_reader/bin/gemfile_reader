@@ -4,8 +4,9 @@ require 'json'
 require_relative '../lib/gemfile_reader'
 
 begin
-  gems = GemfileReader.evaluate(ARGF.read)
+  reader = (ARGF.filename =~ /gemspec$/) ? :GemspecReader : :GemfileReader
+  gems = GemfileReader.const_get(reader).evaluate(ARGF.read)
   puts gems.collect(&:to_hash).to_json
-rescue Exception
+rescue
   puts [].to_json
 end

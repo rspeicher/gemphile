@@ -7,6 +7,10 @@ module SpecHelpers
     File.read(File.expand_path("./gemfiles/#{name}.rb", File.dirname(__FILE__)))
   end
 
+  def gemspec(name)
+    File.read(File.expand_path("./gemspecs/#{name}.gemspec", File.dirname(__FILE__)))
+  end
+
   # Assumes `let(:gems)` has been defined
   def find_gem(name)
     return unless gems
