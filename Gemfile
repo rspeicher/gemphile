@@ -14,7 +14,7 @@ gem 'delayed_job_mongoid', '~> 1.0'
 group :development, :test do
   gem 'capistrano'
   gem 'mocha'
-  gem 'rspec', '~> 2.5'
+  gem 'rspec', '2.6.0.rc2'
   gem 'ruby-debug19'
 end
 
