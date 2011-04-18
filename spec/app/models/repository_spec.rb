@@ -17,12 +17,12 @@ describe Repository do
       end
 
       it "ignores private repositories" do
-        expect { Repository.from_payload(github('private_repo')) }.to_not change(Repository, :count)
+        expect { Repository.from_payload(github('push/private_repo')) }.to_not change(Repository, :count)
       end
     end
 
     context "given valid data" do
-      let(:repo) { Repository.from_payload(github('initial_push')) }
+      let(:repo) { Repository.from_payload(github('push/initial_push')) }
 
       it "extracts owner name" do
         repo.owner.should eql('tsigo')
@@ -63,7 +63,7 @@ describe Repository do
     end
 
     context "given data for a repository we've already seen" do
-      let(:data) { github('initial_push') }
+      let(:data) { github('push/initial_push') }
       let(:repo) { Repository.from_payload(data) }
 
       before do
@@ -93,7 +93,7 @@ describe Repository do
 
           # Use a payload that contains Gemfile modifications in the same
           # repository as "initial_push" from above
-          Repository.from_payload(github('modify_gemfile'))
+          Repository.from_payload(github('push/modify_gemfile'))
         end
       end
     end

@@ -19,7 +19,7 @@ module SpecHelpers
   end
 
   def github(name)
-    File.read(File.expand_path("./fixtures/github_payloads/#{name}.json", File.dirname(__FILE__)))
+    File.read(File.expand_path("./fixtures/github/#{name}.json", File.dirname(__FILE__)))
   end
 end
 
