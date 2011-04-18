@@ -169,7 +169,7 @@ module GemfileReader
         end
       end
 
-      def gem(name, version)
+      def gem(name, version='')
         @gems << Entry.new(name, version)
       end
     end
