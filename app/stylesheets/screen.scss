@@ -36,10 +36,14 @@ header {
   }
 }
 
+section {
+  padding-bottom: 30px;
+}
+
 // Index -- Search
 section.search {
   text-align: center;
-  padding-bottom: 15px;
+  padding-bottom: 30px;
 
   h2 {
     color: #555;
@@ -61,10 +65,6 @@ section.dashboard {
     margin: 15px 0;
     background-color: #EAEAEA;
     @include rounded(10px);
-
-    a {
-      text-decoration: none;
-    }
 
     div.count {
       display: inline-block;
@@ -88,24 +88,32 @@ section.gem_info {
     color: $phile_red;
   }
 
-  div.repository {
-    font-size: 1.5em;
+  div.repository-info {
+    font-size: 24px;
     padding: 10px 15px;
     margin: 15px 0;
     background-color: #EAEAEA;
     @include rounded(10px);
 
+    div.watchers, div.forks, div.repository {
+      display: inline-block;
+    }
+
+    div.repository {
+      margin-left: 10px;
+    }
+
     div.watchers, div.forks {
       letter-spacing: 2px;
       font-size: 13px;
       font-weight: bold;
-      display: inline-block;
       width: 50px;
       background-color: #4C5766;
       color: #fff;
-      padding: 7px 10px;
+      padding: 5px 10px;
       text-align: center;
       @include rounded(5px);
+      margin: 0;
 
       p {
         letter-spacing: 0;

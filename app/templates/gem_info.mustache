@@ -7,7 +7,7 @@
 
   <section class="row">
     {{# repos }}
-    <div class="repository">
+    <div class="repository-info">
       <div class="watchers">
         {{ watchers }}
         <p>watchers</p>
@@ -16,7 +16,9 @@
         {{ forks }}
         <p>forks</p>
       </div>
-      <a href="{{ url }}">{{ owner }}/{{ name }}</a>
+      <div class="repository">
+        <a href="{{ url }}">{{ owner }}/{{ name }}</a>
+      </div>
     </div>
     {{/ repos }}
   </div>
