@@ -28,6 +28,7 @@ group :test do
 
   gem 'guard', '~> 0.3'
   gem 'guard-bundler'
+  gem 'guard-livereload'
   gem 'guard-pow'
   gem 'guard-rspec'
 end

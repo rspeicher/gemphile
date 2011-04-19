@@ -2,6 +2,12 @@ guard 'bundler' do
   watch('Gemfile')
 end
 
+guard 'livereload' do
+  watch(%r{app/views/.*})
+  watch(%r{app/templates/.*})
+  watch(%r{public/.+\.(css|js|html)})
+end
+
 guard 'pow' do
   watch('.powrc')
   watch('.powenv')
@@ -9,7 +15,6 @@ guard 'pow' do
   watch('Gemfile')
   watch('Gemfile.lock')
   watch('app/app.rb')
-  watch(%r{app/.+})
 end
 
 guard 'rspec', :cli => '-d --format documentation' do
