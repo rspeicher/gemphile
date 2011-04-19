@@ -1,7 +1,8 @@
 class Repository
   include Mongoid::Document
   include Mongoid::Timestamps
-  include GemCount
+
+  include GemCountCollection
 
   field :owner,       type: String
   field :name,        type: String
