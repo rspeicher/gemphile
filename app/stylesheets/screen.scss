@@ -19,7 +19,6 @@ header {
   height: 170px;
 
   h1 {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: bold;
     font-size: 144px;
     text-transform: lowercase;
@@ -38,6 +37,7 @@ header {
   }
 }
 
+// Generic section
 section {
   padding-bottom: 30px;
 }
@@ -45,7 +45,6 @@ section {
 // Index -- Search
 section.search {
   text-align: center;
-  padding-bottom: 30px;
 
   h2 {
     color: #555;
@@ -59,8 +58,8 @@ section.search {
   }
 }
 
-// Index -- Most-used Gems, Recent Updates
-section.dashboard {
+// Index -- Most-used Gems
+div.dashboard {
   div.gem {
     font-size: 24px;
     padding: 0 15px;
@@ -81,6 +80,19 @@ section.dashboard {
     div.gem {
       display: inline-block;
     }
+  }
+}
+
+// Index -- Sidebar
+aside.about {
+  h2 {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+  }
+
+  p {
+    padding: 10px 0;
+    text-align: justify;
   }
 }
 
