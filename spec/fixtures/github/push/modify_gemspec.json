@@ -1,0 +1,54 @@
+{
+  "after": "804178e873c19d14dac021f91d6d853347298ea0", 
+  "base_ref": null, 
+  "before": "6a46fc0cb8479208bf85d7ffb0793b7478fc0585", 
+  "commits": [
+    {
+      "added": [], 
+      "author": {
+        "email": "rspeicher@gmail.com", 
+        "name": "Robert Speicher", 
+        "username": "tsigo"
+      }, 
+      "distinct": true, 
+      "id": "804178e873c19d14dac021f91d6d853347298ea0", 
+      "message": "Modify Gemfile", 
+      "modified": [
+        "hook_test.gemspec"
+      ], 
+      "removed": [], 
+      "timestamp": "2011-04-11T13:18:30-07:00", 
+      "url": "https:\/\/github.com\/tsigo\/hook_test\/commit\/804178e873c19d14dac021f91d6d853347298ea0"
+    }
+  ], 
+  "compare": "https:\/\/github.com\/tsigo\/hook_test\/compare\/6a46fc0...804178e", 
+  "created": false, 
+  "deleted": false, 
+  "forced": false, 
+  "pusher": {
+    "email": "rspeicher@gmail.com", 
+    "name": "tsigo"
+  }, 
+  "ref": "refs\/heads\/master", 
+  "repository": {
+    "created_at": "2011\/04\/11 13:14:12 -0700", 
+    "description": "", 
+    "fork": false, 
+    "forks": 1, 
+    "has_downloads": true, 
+    "has_issues": true, 
+    "has_wiki": true, 
+    "homepage": "", 
+    "name": "hook_test", 
+    "open_issues": 0, 
+    "owner": {
+      "email": "rspeicher@gmail.com", 
+      "name": "tsigo"
+    }, 
+    "private": false, 
+    "pushed_at": "2011\/04\/11 13:18:32 -0700", 
+    "size": 108, 
+    "url": "https:\/\/github.com\/tsigo\/hook_test", 
+    "watchers": 1
+  }
+}

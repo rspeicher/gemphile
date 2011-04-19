@@ -15,17 +15,25 @@ class Payload
     @payload['commits']
   end
 
-  # Checks through {commits} for any modifications to Gemfile
+  # Checks through {commits} for any modifications to Gemfile or gemspec
   #
   # Checks additions, removals and modifications
   #
   # @return [Boolean]
-  # @todo TODO: Check for gemspec?
-  def modified_gemfile?
-    commits && commits.any? do |c|
-      c['added'].include?('Gemfile') ||
-      c['modified'].include?('Gemfile') ||
-      c['removed'].include?('Gemfile')
+  def modified_gems?
+    return unless commits
+
+    commits.any? do |c|
+      c['added'].include?('Gemfile') || c['added'].include?(gemspec) ||
+      c['modified'].include?('Gemfile') || c['modified'].include?(gemspec) ||
+      c['removed'].include?('Gemfile') || c['removed'].include?(gemspec)
     end
+  end
+
+  protected
+
+  def gemspec
+    return unless repository
+    @gemspec_name ||= "#{repository['name']}.gemspec"
   end
 end

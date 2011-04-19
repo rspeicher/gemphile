@@ -18,7 +18,12 @@ describe GemfileJob do
   end
 
   it "should be queued from an existing repository with gemspec changes" do
-    pending
+    repo = Repository.from_payload(github('push/initial_push'))
+
+    GemfileJob.expects(:new).with(repo.id).returns(stub(perform: true))
+
+    Repository.from_payload(github('push/modify_gemspec'))
+    Delayed::Job.count.should eql(2)
   end
 
   # Shared setup steps for #perform, #process_gemfile and #process_gemspec
