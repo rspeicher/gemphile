@@ -10,7 +10,6 @@ set :domain,      "tsigo.com"
 set :repository,  "git@tsigo.com:#{application}.git"
 set :scm,         'git'
 set :branch,      'master'
-set :app_server,  :passenger
 
 set :use_sudo, false
 set :keep_releases, 3
@@ -24,16 +23,15 @@ role :db,  domain, :primary => true
 
 namespace :deploy do
   task :start, :roles => :app do
-    run "touch #{current_release}/tmp/restart.txt"
+    run "bundle exec thin -C #{shared_path}/thin.yml start"
   end
 
   task :stop, :roles => :app do
-    # Do nothing.
+    run "bundle exec thin -C #{shared_path}/thin.yml stop"
   end
 
-  desc 'Restart Application'
   task :restart, :roles => :app do
-    run "touch #{current_release}/tmp/restart.txt"
+    run "bundle exec thin -C #{shared_path}/thin.yml restart"
   end
 
   desc 'Symlink the thin config'
