@@ -55,7 +55,7 @@ class Repository
     end
   end
 
-  # Updates embeded {Gem} documents based on a parsing of a Gemfile by {GemfileJob}
+  # Updates embedded {Gem} documents based on a parsing of a Gemfile by {GemfileJob}
   #
   # @param [String] Raw output string, to be parsed into JSON
   def populate_gems(gemstr)
