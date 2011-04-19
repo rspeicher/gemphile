@@ -4,6 +4,8 @@
   border-radius:$radius;
 }
 
+$phile_red: #910000;
+
 // Layout -- Nav
 nav {
   height: 30px;
@@ -22,7 +24,6 @@ header {
     text-align: center;
     padding: 0 0 20px 0;
     letter-spacing: 5px;
-    text-decoration: none;
 
     a, a:link, a:visited, a:hover {
       color: #000;
@@ -30,7 +31,7 @@ header {
     }
 
     span {
-      color: #910000;
+      color: $phile_red;
     }
   }
 }
@@ -77,6 +78,41 @@ section.dashboard {
 
     div.gem {
       display: inline-block;
+    }
+  }
+}
+
+// Gem Info
+section.gem_info {
+  h2 a {
+    color: $phile_red;
+  }
+
+  div.repository {
+    font-size: 1.5em;
+    padding: 10px 15px;
+    margin: 15px 0;
+    background-color: #EAEAEA;
+    @include rounded(10px);
+
+    div.watchers, div.forks {
+      letter-spacing: 2px;
+      font-size: 13px;
+      font-weight: bold;
+      display: inline-block;
+      width: 50px;
+      background-color: #4C5766;
+      color: #fff;
+      padding: 7px 10px;
+      text-align: center;
+      @include rounded(5px);
+
+      p {
+        letter-spacing: 0;
+        font-size: 0.7em;
+        font-weight: normal;
+        color: #ececec;
+      }
     }
   }
 }

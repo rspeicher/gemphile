@@ -1,8 +1,23 @@
-The following projects have {{ gem }} listed in their <code>Gemfile</code>:
+{{> search }}
 
-{{# repos }}
-<p>
-<dt>{{ owner }}/{{ name }}</dt>
-<dt><a href="{{ url }}">GitHub</a></dt>
-</p>
-{{/ repos }}
+<section class="twelvecol last gem_info">
+  <div class="row">
+    <h2>The following projects list <a href="http://rubygems.org/gems/{{ gem }}">{{ gem }}</a> as a dependency:</h2>
+  </div>
+
+  <section class="row">
+    {{# repos }}
+    <div class="repository">
+      <div class="watchers">
+        {{ watchers }}
+        <p>watchers</p>
+      </div>
+      <div class="forks">
+        {{ forks }}
+        <p>forks</p>
+      </div>
+      <a href="{{ url }}">{{ owner }}/{{ name }}</a>
+    </div>
+    {{/ repos }}
+  </div>
+</section>

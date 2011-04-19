@@ -1,7 +1,4 @@
-<section class="twelvecol search">
-  <h2>Search for a gem to list the projects that use it</h2>
-  <input type="text" id="search" name="search" placeholder="Gem Search" />
-</section>
+{{> search }}
 
 <section class="dashboard eightcol">
   <h2>Most-used Gems</h2>
@@ -9,7 +6,7 @@
   {{# gems }}
   <div class="gem">
     <div class="count">{{count}}</div>
-    <div class="gem"><a href="/{{ name }}">{{ name }}</a></div>
+    <div class="gem"><a href="/gems/{{ name }}">{{ name }}</a></div>
   </div>
   {{/ gems }}
   </ul>
