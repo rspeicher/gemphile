@@ -1,13 +1,21 @@
-<h2>Popular gems</h2>
-<ul>
-  {{# gems }}
-  <li>{{ count }}: <a href="/{{ name }}">{{ name }}</a></li>
-  {{/ gems }}
-</ul>
+<section class="twelvecol search">
+  <h2>Search for a gem to list the projects that use it</h2>
+  <input type="text" id="search" name="search" placeholder="Gem Search" />
+</section>
 
-<h2>Latest projects</h2>
-<ul>
-  {{# repos }}
-  <li><a href="{{ url }}">{{ to_s }}</a></li>
-  {{/ repos }}
-</ul>
+<section class="eightcol">
+  <h2>Popular gems</h2>
+  <ul>
+    {{# gems }}
+    <li>{{ count }}: <a href="/{{ name }}">{{ name }}</a></li>
+    {{/ gems }}
+  </ul>
+</section>
+<aside class="fourcol last">
+  <h2>Latest projects</h2>
+  <ul>
+    {{# repos }}
+    <li><a href="{{ url }}">{{ to_s }}</a></li>
+    {{/ repos }}
+  </ul>
+</aside>
