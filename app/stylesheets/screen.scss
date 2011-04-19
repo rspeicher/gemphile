@@ -1,0 +1,45 @@
+nav {
+  height: 30px;
+  background-color: #fff;
+}
+
+header {
+  height: 170px;
+
+  h1 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    font-size: 144px;
+    text-transform: lowercase;
+    text-align: center;
+    padding: 0 0 20px 0;
+    letter-spacing: 5px;
+
+    span {
+      color: #910000;
+    }
+  }
+}
+
+section.search {
+  text-align: center;
+  padding-bottom: 15px;
+
+  h2 {
+    color: #555;
+    padding: 15px;
+  }
+
+  input#search {
+    width: 50%;
+    font-size: 35px;
+    height: 50px;
+  }
+}
+
+img#ribbon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+}

@@ -6,6 +6,7 @@ gem 'sinatra',  '~> 1.2'
 gem 'mongoid',  '~> 2.0'
 gem 'bson_ext', '~> 1.3'
 gem 'mustache', '~> 0.99'
+gem 'compass',  '~> 0.10'
 
 gem 'curb',                '~> 0.7'
 gem 'delayed_job',         '~> 2.1'
@@ -28,6 +29,7 @@ group :test do
 
   gem 'guard', '~> 0.3'
   gem 'guard-bundler'
+  gem 'guard-compass'
   gem 'guard-livereload'
   gem 'guard-pow'
   gem 'guard-rspec'
