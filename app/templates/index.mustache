@@ -1,6 +1,42 @@
 {{> search }}
 
-<section class="dashboard eightcol">
+<section class="container">
+  <div class="row">
+    <div class="fourcol">
+      <h2>What is this?</h2>
+      <p>For some developers, the best way to learn how to use a gem is to see
+      how other projects use it in the real world. But what if you can't easily
+      find a project that uses the gem you're trying to learn about?
+      <b>Gemphile</b> was created to index the Gemfiles and gemspecs of Ruby
+      projects on GitHub and then to provide a simple search interface to find
+      those projects.</p>
+    </div>
+    <div class="fourcol">
+      <h2>Lorem?</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean a nisi
+      tortor.  Duis semper ullamcorper sapien ac sagittis. Aliquam sit amet
+      interdum nunc.  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      Ut scelerisque rhoncus fermentum. Nulla auctor placerat ligula, at
+      pharetra neque ornare quis. Sed laoreet ultricies nibh, eu sollicitudin
+      nisi mattis vitae. Fusce sagittis pellentesque feugiat. Ut ac accumsan
+      neque. Aliquam id elit justo. Mauris sed sapien id lorem condimentum
+      convallis. Ut risus nisl, consequat et varius at, volutpat et lacus.
+      Mauris quam justo, rutrum in interdum id, commodo ut dolor.  Donec
+      volutpat pulvinar fermentum. Integer hendrerit luctus felis, eu vehicula
+      diam vestibulum eget. Fusce sit amet urna ante, vel vulputate purus.
+      Morbi sit amet aliquam felis. Aliquam egestas, sem non varius fermentum,
+      justo odio gravida lectus, ut iaculis nunc dolor eu nulla. Fusce lobortis
+      rutrum lorem, quis tincidunt turpis congue vitae.</p>
+    </div>
+    <div class="fourcol last">
+      <h2>How do I add my project?</h2>
+      <p>TODO: Polish</p>
+      <p>Add a GitHub post-receive hook to <code>http://gemphile.org/push</code></p>
+    </div>
+  </div>
+</section>
+
+<section class="dashboard twelvecol">
   <h2>Most-used Gems</h2>
 
   {{# gems }}
@@ -11,11 +47,3 @@
   {{/ gems }}
   </ul>
 </section>
-<aside class="fourcol last">
-  <h2>Recent Updates</h2>
-  <ul>
-    {{# repos }}
-    <li><a href="{{ url }}">{{ to_s }}</a></li>
-    {{/ repos }}
-  </ul>
-</aside>
