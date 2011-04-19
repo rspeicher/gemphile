@@ -23,7 +23,7 @@ module Gemphile
       mustache :index
     end
 
-    get '/:gem' do
+    get '/gems/:gem' do
       @gem = params[:gem]
       mustache :gem_info
     end
