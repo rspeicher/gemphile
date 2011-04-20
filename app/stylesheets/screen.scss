@@ -127,8 +127,8 @@ aside.about {
   fieldset {
     padding: 10px;
 
-    input[type=text] {
-      width: 80%;
+    input#repo {
+      width: 75%;
     }
 
     span.hint {
