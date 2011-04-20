@@ -12,6 +12,19 @@ $phile_red: #910000;
 nav {
   height: 30px;
   background-color: #fff;
+  text-align: center;
+  padding: 10px;
+
+  span {
+    font-size: 1.2em;
+  }
+
+  span.notice {
+    color: green;
+  }
+  span.error {
+    color: red;
+  }
 }
 
 // Layout -- Header
@@ -111,8 +124,18 @@ aside.about {
     padding: 10px 0;
   }
 
-  ol {
-    margin-left: 15px;
+  fieldset {
+    padding: 10px;
+
+    input[type=text] {
+      width: 80%;
+    }
+
+    span.hint {
+      font-size: 0.8em;
+      color: #888;
+      word-spacing: 2px;
+    }
   }
 }
 
@@ -162,12 +185,13 @@ section.gem_info {
 }
 
 footer {
+  font-size: 10px;
   text-align: center;
   color: #ddd;
 
   // NetworkRedux logo
   div.network_redux {
-    font-size: 18px;
+    font-size: 14px;
     text-transform: uppercase;
 
     a {

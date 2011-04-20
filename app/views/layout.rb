@@ -7,5 +7,9 @@ module Views
     def production?
       Gemphile::App.production?
     end
+
+    def flash
+      @flash
+    end
   end
 end

@@ -24,6 +24,10 @@ module Gemphile
       :templates => "#{dir}/templates"
     }
 
+    before do
+      @flash = flash
+    end
+
     get '/' do
       mustache :index
     end
@@ -53,13 +57,16 @@ module Gemphile
     # Manually add a username or repository to be indexed
     post '/add' do
       if params['repo'] =~ GITHUB_USER
+        flash[:notice] = "Added #{params['repo']} for indexing. Thanks!"
         Delayed::Job.enqueue UserJob.new(params['repo'])
-        status(200)
+        redirect to('/')
       elsif params['repo'] =~ GITHUB_REPO
+        flash[:notice] = "Added #{params['repo']} for indexing. Thanks!"
         Delayed::Job.enqueue RepositoryJob.new(params['repo'])
-        status(200)
+        redirect to('/')
       else
-        status(500)
+        flash[:error] = "Couldn't add repository #{params['repo']}. Sorry!"
+        redirect to('/')
       end
     end
 

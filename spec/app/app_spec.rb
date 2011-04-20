@@ -3,6 +3,10 @@ require 'spec_helper'
 describe Gemphile::App do
   include Rack::Test::Methods
 
+  def flash
+    last_request.env['x-rack.flash']
+  end
+
   describe "GET /search" do
     context "with an exact match" do
       it "should redirect on an exact match" do
@@ -45,19 +49,22 @@ describe Gemphile::App do
 
     it "ignores invalid repositories" do
       post '/add', :repo => 'tsigo/gemphile/production'
-      last_response.should_not be_ok
+      flash.error.should_not be_nil
+      last_response.should be_redirect
     end
 
     it "recognizes a user name" do
       Delayed::Job.expects(:enqueue).with { |v| v.is_a?(UserJob) }
       post '/add', :repo => 'tsigo'
-      last_response.should be_ok
+      flash.notice.should_not be_nil
+      last_response.should be_redirect
     end
 
     it "recognizes a repository" do
       Delayed::Job.expects(:enqueue).with { |v| v.is_a?(RepositoryJob) }
       post '/add', :repo => 'tsigo/gemphile'
-      last_response.should be_ok
+      flash.notice.should_not be_nil
+      last_response.should be_redirect
     end
   end
 end

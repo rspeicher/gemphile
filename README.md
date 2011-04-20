@@ -50,8 +50,6 @@ Basically:
 ### TODO
 
 * I'd love some HTML/CSS improvements. I am not a designer.
-* Add a simple "add my project" form that can provide an easier way to start
-  indexing a repository besides testing a post-receive hook.
 
 ## Copyright
 

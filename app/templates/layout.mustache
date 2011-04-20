@@ -9,6 +9,10 @@
 
   <body>
     <nav class="container">
+      {{# flash }}
+      <span class="notice">{{ notice }}</span>
+      <span class="error">{{ error }}</span>
+      {{/ flash }}
     </nav>
 
     <header class="container">

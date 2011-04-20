@@ -8,7 +8,7 @@
       {{# gems }}
       <div class="gem">
         <div class="count">{{count}}</div>
-        <div class="gem"><a href="/gems/{{ name }}">{{ name }}</a></div>
+        <div class="gem"><a href="/gems/{{name}}">{{name}}</a></div>
       </div>
       {{/ gems }}
     </div>
@@ -22,16 +22,15 @@
       and then to provide a simple search interface to find those projects.</p>
 
       <h2>Why don't I see my project?</h2>
-      <p>Except for a few projects added as seed data, Gemphile is entirely
-      opt-in.  If you'd like to contribute to the site and have us index your
-      project, follow these steps:
-      <ol>
-        <li>Go to your project's administration page</li>
-        <li>Add a GitHub <a href="http://help.github.com/post-receive-hooks/" target="_blank">post-receive</a> URL to your project</li>
-        <li>Enter <a href="http://gemphile.org/push">http://gemphile.org/push</a> as the URL</li>
-        <li>Save and then click "Test Hook"</li>
-      </ol>
-      This will pull in your project's current info and let the site keep that information updated.</p>
-    </div>
+      <p>We just don't know about it yet! Please add it:</p>
+      <form method="post" action="/add">
+        <fieldset>
+          <input type="text" id="repo" name="repo" placeholder="tsigo/gemphile" />
+          <input type="submit" name="submit" value="Add" />
+          <span class="hint">Enter your GitHub username to add all of your public Ruby repositories, or
+            enter a <code>username/repository</code> combination to add only that repository.</span>
+        </fieldset>
+      </form>
+    </aside>
   </div>
 </section>
