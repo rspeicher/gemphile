@@ -1,6 +1,34 @@
 require 'spec_helper'
 
 describe Repository do
+  describe ".from_user" do
+    it "rescues from a JSON parse error" do
+      expect { Repository.from_user('') }.to_not raise_error
+    end
+
+    context "given valid user API data" do
+      before do
+        Repository.from_user(github('repo/tsigo'))
+      end
+
+      it "ignores private repositories" do
+        Repository.where(owner: 'tsigo', name: 'super_secret').count.should eql(0)
+      end
+
+      it "ignores non-Ruby repositories" do
+        Repository.where(owner: 'tsigo', name: 'cutup').count.should eql(0)
+      end
+
+      it "ignores forks" do
+        Repository.where(owner: 'tsigo', name: 'wowr').count.should eql(0)
+      end
+
+      it "calls Repository.from_payload for valid repositories" do
+        Repository.where(owner: 'tsigo', name: 'wriggle').count.should eql(1)
+      end
+    end
+  end
+
   describe ".from_payload" do
     context "given invalid or private data" do
       it "ignores Hash data" do
