@@ -1,11 +1,11 @@
 module Views
   class Layout < Mustache
     def development?
-      RACK_ENV == 'development' ? true : nil
+      Gemphile::App.development?
     end
 
     def production?
-      RACK_ENV == 'production' ? true : nil
+      Gemphile::App.production?
     end
   end
 end
