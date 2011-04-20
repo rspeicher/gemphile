@@ -31,7 +31,7 @@ header {
       text-decoration: none;
     }
 
-    span {
+    span.highlight {
       color: $phile_red;
     }
   }
@@ -40,6 +40,14 @@ header {
 // Generic section
 section {
   padding-bottom: 30px;
+
+  h2 span.highlight {
+    color: $phile_red;
+
+    a {
+      color: $phile_red;
+    }
+  }
 }
 
 // Index -- Search
@@ -60,6 +68,10 @@ section.search {
 
 // Index -- Most-used Gems
 div.dashboard {
+  h2 span.highlight {
+    color: $phile_red;
+  }
+
   div.gem {
     font-size: 24px;
     padding: 0 15px;
@@ -113,10 +125,12 @@ section.gem_info {
       display: inline-block;
     }
 
+    // Repository link
     div.repository {
       margin-left: 10px;
     }
 
+    // Watcher/Fork boxes
     div.watchers, div.forks {
       letter-spacing: 2px;
       font-size: 13px;
