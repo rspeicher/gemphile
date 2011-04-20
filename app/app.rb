@@ -5,6 +5,7 @@ module Gemphile
   GITHUB_REPO = /^([^-][a-zA-Z0-9\-]+)\/([^\/]+)$/
 
   class App < Sinatra::Base
+    use Rack::Flash, :accessorize => [:notice, :error]
     register Mustache::Sinatra
 
     dir = File.dirname(File.expand_path(__FILE__))
@@ -13,6 +14,7 @@ module Gemphile
     set :root,     RACK_ROOT
     set :app_file, __FILE__
     set :static,   true
+    set :sessions, true
 
     set :views, "#{dir}/templates"
 

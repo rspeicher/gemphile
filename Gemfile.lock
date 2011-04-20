@@ -82,6 +82,8 @@ GEM
     open_gem (1.4.2)
       launchy (~> 0.3.5)
     rack (1.2.2)
+    rack-flash (0.1.1)
+      rack
     rack-test (0.5.7)
       rack (>= 1.0)
     rake (0.8.7)
@@ -140,6 +142,7 @@ DEPENDENCIES
   mocha
   mongoid (~> 2.0)
   mustache (~> 0.99)
+  rack-flash
   rack-test
   rake
   rspec (= 2.6.0.rc2)

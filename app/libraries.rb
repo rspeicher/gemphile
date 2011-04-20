@@ -11,10 +11,10 @@ require 'delayed_job'
 require 'delayed_job_mongoid'
 require 'mongoid'
 require 'mustache/sinatra'
+require 'rack-flash'
 require 'sinatra/base'
 
 # gemphile
-require_relative 'helpers'
 require_relative 'jobs/gemfile_job'
 require_relative 'jobs/repository_job'
 require_relative 'jobs/user_job'

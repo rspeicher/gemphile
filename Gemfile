@@ -7,6 +7,7 @@ gem 'mongoid',  '~> 2.0'
 gem 'bson_ext', '~> 1.3'
 gem 'mustache', '~> 0.99'
 gem 'compass',  '~> 0.10'
+gem 'rack-flash'
 
 gem 'curb',                '~> 0.7'
 gem 'delayed_job',         '~> 2.1'
