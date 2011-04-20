@@ -17,30 +17,17 @@
       <h2>What is this?</h2>
       <p>For some developers, the best way to learn how to use a gem is to see
       how other projects use it in the real world. But what if you can't easily
-      find a project that uses the gem you're trying to learn about?
-      <b>Gemphile</b> was created to index the Gemfiles and gemspecs of Ruby
-      projects on GitHub and then to provide a simple search interface to find
-      those projects.</p>
+      find a project that uses the gem you're trying to learn about?  Gemphile
+      was created to index the Gemfiles and gemspecs of Ruby projects on GitHub
+      and then to provide a simple search interface to find those projects.</p>
 
-      <h2>Lorem?</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean a nisi
-      tortor.  Duis semper ullamcorper sapien ac sagittis. Aliquam sit amet
-      interdum nunc.  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      Ut scelerisque rhoncus fermentum. Nulla auctor placerat ligula, at
-      pharetra neque ornare quis. Sed laoreet ultricies nibh, eu sollicitudin
-      nisi mattis vitae. Fusce sagittis pellentesque feugiat. Ut ac accumsan
-      neque. Aliquam id elit justo. Mauris sed sapien id lorem condimentum
-      convallis. Ut risus nisl, consequat et varius at, volutpat et lacus.
-      Mauris quam justo, rutrum in interdum id, commodo ut dolor.  Donec
-      volutpat pulvinar fermentum. Integer hendrerit luctus felis, eu vehicula
-      diam vestibulum eget. Fusce sit amet urna ante, vel vulputate purus.
-      Morbi sit amet aliquam felis. Aliquam egestas, sem non varius fermentum,
-      justo odio gravida lectus, ut iaculis nunc dolor eu nulla. Fusce lobortis
-      rutrum lorem, quis tincidunt turpis congue vitae.</p>
-
-      <h2>How do I add my project?</h2>
-      <p>TODO: Polish</p>
-      <p>Add a GitHub post-receive hook to <code>http://gemphile.org/push</code></p>
-    </aside>
+      <h2>Why don't I see my project?</h2>
+      <p>Except for a few projects added as seed data, Gemphile is entirely
+      opt-in.  If you'd like to contribute to the site and have us index your
+      project, just add a GitHub <a href="http://help.github.com/post-receive-hooks/">post-receive</a>
+      hook for your projects pointing to <a href="http://gemphile.org/push">http://gemphile.org/push</a>
+      then test it and the site will pull in your dependencies, as well as
+      update them when you change your Gemfile or gemspec.</p>
+    </div>
   </div>
 </section>
