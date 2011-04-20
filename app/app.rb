@@ -5,12 +5,13 @@ module Gemphile
   GITHUB_REPO = /^([^-][a-zA-Z0-9\-]+)\/([^\/]+)$/
 
   class App < Sinatra::Base
+    enable :sessions
     use Rack::Flash, :accessorize => [:notice, :error]
     register Mustache::Sinatra
 
     dir = File.dirname(File.expand_path(__FILE__))
 
-    set :public,   "#{dir}/public"
+    set :public,   "#{RACK_ROOT}/public"
     set :root,     RACK_ROOT
     set :app_file, __FILE__
     set :static,   true
@@ -59,15 +60,14 @@ module Gemphile
       if params['repo'] =~ GITHUB_USER
         flash[:notice] = "Added #{params['repo']} for indexing. Thanks!"
         Delayed::Job.enqueue UserJob.new(params['repo'])
-        redirect to('/')
       elsif params['repo'] =~ GITHUB_REPO
         flash[:notice] = "Added #{params['repo']} for indexing. Thanks!"
         Delayed::Job.enqueue RepositoryJob.new(params['repo'])
-        redirect to('/')
       else
         flash[:error] = "Couldn't add repository #{params['repo']}. Sorry!"
-        redirect to('/')
       end
+
+      redirect to('/')
     end
 
     not_found do
