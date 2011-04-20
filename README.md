@@ -13,17 +13,17 @@ simple search interface to find those projects.
 Gemphile makes use of GitHub's post-receive hooks to discover new projects and
 to know when an existing project's Gemfile or gemspec has been modified.
 
-Also, I needed an excuse to work with Sinatra, MongoDB, Mustache, Ruby 1.9 and
-the GitHub API.
-
 ## Contributing
 
-There's still plenty of work to be done, particularly on the front-end.
-Contributions would be very much appreciated. Just send a pull request.
+Contributions would be very appreciated; just send a pull request.
+
+If you're thinking of adding some major functionality like voting, or
+something, send me a message on GitHub first so we can discuss it, as I'd like
+to keep the site simple for now.
 
 ### Requirements
 
-* Ruby 1.9.2
+* Ruby 1.9
 * MongoDB 1.8+
 
 ### Organization
@@ -37,15 +37,33 @@ Gemphile consists of two major parts:
 
 ### Developer Quickstart
 
-Basically:
+First, you'll need Ruby 1.9. Working with [RVM](https://rvm.beginrescueend.com/)
+is probably easiest.
 
+    rvm install 1.9.2
     rvm --create 1.9.2@gemphile
+
+Next, you'll need MongoDB. If you're on Mac OSX, this is super easy with
+[Homebrew](https://github.com/mxcl/homebrew):
+
+    brew install mongodb
+
+Ubuntu/Debian users, see the official
+[packages](http://www.mongodb.org/display/DOCS/Ubuntu+and+Debian+packages).
+
+Then use [Bundler](http://gembundler.com/) to install the dependencies.
+
+    gem install bundler
     bundle install
+
+Then run the specs.
+
     rake spec
 
-[Guard](https://github.com/guard/guard) is used to facilitate automatic testing.
+If everything passes, you're good to go.
 
-    guard
+Sass stylesheets are not automatically converted to CSS at runtime. You'll need
+to compile them as needed with `sass` or just leave `compass watch` running.
 
 ### TODO
 
@@ -53,4 +71,5 @@ Basically:
 
 ## Copyright
 
-Copyright (c) 2011 Robert Speicher. License TBD.
+Copyright (c) 2011 Robert Speicher. Released under the MIT License. See
+`LICENSE` for details.
