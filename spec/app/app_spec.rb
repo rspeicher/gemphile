@@ -36,4 +36,28 @@ describe Gemphile::App do
       last_response.should_not be_ok
     end
   end
+
+  describe "POST /add" do
+    it "ignores invalid usernames" do
+      post '/add', :repo => '-tsigo'
+      last_response.should_not be_ok
+    end
+
+    it "ignores invalid repositories" do
+      post '/add', :repo => 'tsigo/gemphile/production'
+      last_response.should_not be_ok
+    end
+
+    it "recognizes a user name" do
+      Delayed::Job.expects(:enqueue).with { |v| v.is_a?(UserJob) }
+      post '/add', :repo => 'tsigo'
+      last_response.should be_ok
+    end
+
+    it "recognizes a repository" do
+      Delayed::Job.expects(:enqueue).with { |v| v.is_a?(RepositoryJob) }
+      post '/add', :repo => 'tsigo/gemphile'
+      last_response.should be_ok
+    end
+  end
 end

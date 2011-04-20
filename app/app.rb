@@ -1,6 +1,9 @@
 require 'app/libraries'
 
 module Gemphile
+  GITHUB_USER = /^([^-][a-zA-Z0-9\-]+)$/
+  GITHUB_REPO = /^([^-][a-zA-Z0-9\-]+)\/([^\/]+)$/
+
   class App < Sinatra::Base
     register Mustache::Sinatra
 
@@ -39,6 +42,19 @@ module Gemphile
 
     post '/push' do
       if repo = Repository.from_payload(params['payload'])
+        status(200)
+      else
+        status(500)
+      end
+    end
+
+    # Manually add a username or repository to be indexed
+    post '/add' do
+      if params['repo'] =~ GITHUB_USER
+        Delayed::Job.enqueue UserJob.new(params['repo'])
+        status(200)
+      elsif params['repo'] =~ GITHUB_REPO
+        Delayed::Job.enqueue RepositoryJob.new(params['repo'])
         status(200)
       else
         status(500)
