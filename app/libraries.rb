@@ -16,6 +16,8 @@ require 'sinatra/base'
 # gemphile
 require_relative 'helpers'
 require_relative 'jobs/gemfile_job'
+require_relative 'jobs/repository_job'
+require_relative 'jobs/user_job'
 require_relative 'models/gem_count'
 require_relative 'models/gem_count_collection'
 require_relative 'models/gem_entry'
