@@ -158,6 +158,26 @@ section.gem_info {
   }
 }
 
+footer {
+  text-align: center;
+  color: #ddd;
+
+  // NetworkRedux logo
+  div.network_redux {
+    font-size: 18px;
+    text-transform: uppercase;
+
+    a {
+      color: #c8c8c8;
+      text-decoration: none;
+    }
+
+    strong {
+      display: inline;
+    }
+  }
+}
+
 // GitHub ribbon
 img#ribbon {
   position: absolute;
