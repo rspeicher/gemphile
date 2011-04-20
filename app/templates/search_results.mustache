@@ -1,0 +1,16 @@
+{{> search }}
+
+<section class="search_results container">
+  <div class="row">
+    <h2>A gem named <span class="highlight">{{ query }}</span> could not be found. Possible matches:</h2>
+  </div>
+
+  <div class="row">
+    {{# gems }}
+    <div class="gem">
+      <div class="count">{{count}}</div>
+      <div class="gem"><a href="/gems/{{ name }}">{{ name }}</a></div>
+    </div>
+    {{/ gems }}
+  </div>
+</section>

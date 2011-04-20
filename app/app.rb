@@ -28,6 +28,15 @@ module Gemphile
       mustache :gem_info
     end
 
+    get '/search' do
+      if GemCount.where(_id: params['q']).count == 1
+        redirect to("/gems/#{params['q']}")
+      else
+        @query = params['q']
+        mustache :search_results
+      end
+    end
+
     post '/push' do
       if repo = Repository.from_payload(params['payload'])
         status(200)

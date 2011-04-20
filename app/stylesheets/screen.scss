@@ -95,6 +95,11 @@ div.dashboard {
   }
 }
 
+// Search Results
+section.search_results {
+  @extend div.dashboard;
+}
+
 // Index -- Sidebar
 aside.about {
   h2 {
