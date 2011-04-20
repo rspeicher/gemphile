@@ -87,10 +87,10 @@ div.dashboard {
 
   div.gem {
     font-size: 24px;
-    padding: 0 15px;
-    margin: 15px 0;
+    padding: 0 5px;
+    margin: 10px 0;
     background-color: #EAEAEA;
-    @include rounded(10px);
+    @include rounded(8px);
 
     div.count {
       display: inline-block;
@@ -99,7 +99,7 @@ div.dashboard {
       color: #fff;
       padding: 5px 10px;
       text-align: center;
-      @include rounded(5px);
+      @include rounded(8px);
     }
 
     div.gem {
@@ -132,6 +132,7 @@ aside.about {
     }
 
     span.hint {
+      display: block;
       font-size: 0.8em;
       color: #888;
       word-spacing: 2px;
