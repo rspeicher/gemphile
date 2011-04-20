@@ -36,6 +36,7 @@ group 'frontend' do
     watch('Gemfile')
     watch('Gemfile.lock')
     watch('app/app.rb')
-    watch(%r{^app/views/.*})
+    watch(%r{^app/models/.+\.rb})
+    watch(%r{^app/views/.+\.rb})
   end
 end

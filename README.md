@@ -1,15 +1,19 @@
 # Gemphile
 
-Gemfile indexing
+A Gemfile and gemspec indexer
 
 ## Purpose
 
-Ever wanted a real-world usage example for a particular Ruby gem, but couldn't
-find any projects that use it? Well, now you can search for it on Gemphile and
-get a list of projects that require that gem in their Gemfile.
+For some developers, the best way to learn how to use a gem is to see how other
+projects use it in the real world. But what if you can't easily find a project
+that uses the gem you're trying to learn about? Gemphile was created to index
+the Gemfiles and gemspecs of Ruby projects on GitHub and then to provide a
+simple search interface to find those projects.
 
 Gemphile makes use of GitHub's post-receive hooks to discover new projects and
-to know when an existing project's Gemfile has been modified.
+to know when an existing project's Gemfile or gemspec has been modified.
+
+Also, I needed an excuse to work with Sinatra, MongoDB and the GitHub API.
 
 ## Contributing
 
@@ -44,7 +48,9 @@ Basically:
 
 ### TODO
 
-* **Front-end!**
+* I'd love some HTML/CSS improvements. I am not a designer.
+* Add a simple "add my project" form that can provide an easier way to start
+  indexing a repository besides testing a post-receive hook.
 
 ## Copyright
 
