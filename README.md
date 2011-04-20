@@ -13,7 +13,8 @@ simple search interface to find those projects.
 Gemphile makes use of GitHub's post-receive hooks to discover new projects and
 to know when an existing project's Gemfile or gemspec has been modified.
 
-Also, I needed an excuse to work with Sinatra, MongoDB and the GitHub API.
+Also, I needed an excuse to work with Sinatra, MongoDB, Mustache, Ruby 1.9 and
+the GitHub API.
 
 ## Contributing
 
