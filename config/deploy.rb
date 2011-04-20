@@ -23,15 +23,15 @@ role :db,  domain, :primary => true
 
 namespace :deploy do
   task :start, :roles => :app do
-    run "bundle exec thin -C #{shared_path}/thin.yml start"
+    run "cd #{current_release} && bundle exec thin -C #{shared_path}/thin.yml start"
   end
 
   task :stop, :roles => :app do
-    run "bundle exec thin -C #{shared_path}/thin.yml stop"
+    run "cd #{current_release} && bundle exec thin -C #{shared_path}/thin.yml stop"
   end
 
   task :restart, :roles => :app do
-    run "bundle exec thin -C #{shared_path}/thin.yml restart"
+    run "cd #{current_release} && bundle exec thin -C #{shared_path}/thin.yml restart"
   end
 
   desc 'Symlink the thin config'
@@ -46,29 +46,27 @@ namespace :delayed_job do
     fetch(:rails_env, false) ? "RACK_ENV=#{fetch(:rails_env)}" : ''
   end
 
-  def args
-    fetch(:delayed_job_args, "")
-  end
-
   def roles
     fetch(:delayed_job_server_role, :app)
   end
 
   desc "Stop the delayed_job process"
   task :stop, :roles => lambda { roles } do
-    run "cd #{current_path};#{rack_env} bin/gemphile_worker stop"
+    run "cd #{current_release} && #{rack_env} bundle exec bin/gemphile_worker stop"
   end
 
   desc "Start the delayed_job process"
   task :start, :roles => lambda { roles } do
-    run "cd #{current_path};#{rack_env} bin/gemphile_worker start #{args}"
+    run "cd #{current_release} && #{rack_env} bundle exec bin/gemphile_worker start"
   end
 
   desc "Restart the delayed_job process"
   task :restart, :roles => lambda { roles } do
-    run "cd #{current_path};#{rack_env} bin/gemphile_worker restart #{args}"
+    run "cd #{current_release} && #{rack_env} bundle exec bin/gemphile_worker restart"
   end
 end
+
+after "deploy",         "deploy:symlink_settings"
 
 after "deploy:stop",    "delayed_job:stop"
 after "deploy:start",   "delayed_job:start"
