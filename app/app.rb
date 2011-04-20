@@ -44,5 +44,13 @@ module Gemphile
         status(500)
       end
     end
+
+    not_found do
+      mustache :"404"
+    end
+
+    error do
+      mustache :"500"
+    end
   end
 end
