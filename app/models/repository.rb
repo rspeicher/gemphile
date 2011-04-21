@@ -47,6 +47,9 @@ class Repository
   validates_presence_of :name
   validates_format_of :url, with: %r{^https?://github\.com/.*}
 
+  scope :with_gem, ->(name) { where('gem_entries.name' => name) }
+  scope :by_popularity, order_by([[:watchers, Mongo::DESCENDING], [:forks, Mongo::DESCENDING]])
+
   after_create :queue_gemfile_update
 
   def to_s
