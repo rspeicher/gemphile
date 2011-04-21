@@ -13,6 +13,12 @@ simple search interface to find those projects.
 Gemphile makes use of GitHub's post-receive hooks to discover new projects and
 to know when an existing project's Gemfile or gemspec has been modified.
 
+## So it's like [gemsearch](http://gemsearch.heroku.com/)?
+
+Sort of. To my knowledge, that site only allows searching gems' dependencies
+against other gems. If a gem is used in a project that no other gem depends on,
+that project won't show up.
+
 ## Contributing
 
 Contributions would be very appreciated; just send a pull request.
