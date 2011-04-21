@@ -17,6 +17,8 @@ set :keep_releases, 3
 set :user, 'tsigo'
 set :ssh_options, { :forward_agent => true, :keys => "/Users/tsigo/.ssh/id_rsa" }
 
+set :normalize_asset_timestamps, false
+
 role :app, domain
 role :web, domain
 role :db,  domain, :primary => true
