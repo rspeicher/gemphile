@@ -147,7 +147,7 @@ section.gem_info {
   }
 
   div.repository-info {
-    font-size: 24px;
+    font-size: 18px;
     padding: 10px 15px;
     margin: 15px 0;
     background-color: #EAEAEA;
@@ -159,7 +159,13 @@ section.gem_info {
 
     // Repository link
     div.repository {
+      vertical-align: top;
       margin-left: 10px;
+
+      span {
+        font-size: 12px;
+        display: block;
+      }
     }
 
     // Watcher/Fork boxes
