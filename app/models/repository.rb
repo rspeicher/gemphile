@@ -31,7 +31,7 @@ class Repository
 
   field :owner,       type: String
   field :name,        type: String
-  field :description, type: String
+  field :description, type: String,  default: ""
   field :fork,        type: Boolean, default: false
   field :url,         type: String
   field :homepage,    type: String
