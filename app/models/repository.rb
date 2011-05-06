@@ -9,13 +9,13 @@
 #
 # === User API
 #
-#   >> json = Curb::Easy.perform("http://github.com/api/v2/json/repos/show/tsigo")
+#   >> json = Curl::Easy.perform("http://github.com/api/v2/json/repos/show/tsigo")
 #   >> Repository.from_user(json)
 #   => ... creates (or updates existing) Repository records
 #
 # === Repository API
 #
-#   >> json = Curb::Easy.perform("http://github.com/api/v2/json/repos/show/tsigo/gemphile")
+#   >> json = Curl::Easy.perform("http://github.com/api/v2/json/repos/show/tsigo/gemphile")
 #   >> Repository.from_payload(json)
 #   => ... creates one (or updates one existing) Repository record
 #
